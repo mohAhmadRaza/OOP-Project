@@ -1,0 +1,163 @@
+#include<iostream>
+#include<string>
+using namespace std;
+
+class Question{
+    string *question;
+    string *ans1;
+    string *ans2;
+    string *ans3;
+    string *ans4;
+    string *correctans;
+    int correct;
+    int size;
+    public:
+    Question(){};
+    Question(int a){
+        this->size = a;
+        question = new string[size];
+        ans1 = new string[size];
+        ans2 = new string[size];
+        ans3 = new string[size];
+        ans4 = new string[size];
+        correctans = new string[size];
+        for(int i=0;i<size;i++){
+            question[i] = "";
+            ans1[i] = "";
+            ans2[i] = "";
+            ans3[i] = "";
+            ans4[i] = "";
+            correctans[i] = "";
+        }
+        correct = 0;
+    }
+    
+    void setquestion(int a,string b){
+        question[a] = b;
+    }
+    void setans1(int a,string b){
+        ans1[a] = b;
+    }
+    void setans2(int a,string b){
+        ans2[a] = b;
+    }
+    void setans3(int a,string b){
+        ans3[a] = b;
+    }
+    void setans4(int a,string b){
+        ans4[a] = b;
+    }
+    void setcorrectans(int a,string b){
+        correctans[a] = b;
+    }
+    string getcorrectans(int i){
+        return correctans[i];
+    }
+    string getans1(int i){
+        return ans1[i];
+    }
+    string getans2(int i){
+        return ans2[i];
+    }
+    string getans3(int i){
+        return ans3[i];
+    }
+    string getans4(int i){
+        return ans4[i];
+    }
+    void check(int i,string j){
+        if(j == correctans[i]){
+            correct++;
+        }
+    }
+    int getcount(){
+        return correct;
+    }
+    ~Question(){
+        delete[] question;
+        delete[] ans1;
+        delete[] ans2;
+        delete[] ans3;
+        delete[] ans4;
+        delete[] correctans;
+    }
+};
+int main(){
+    int size = 5,count = 0;string str,ans,correct;
+    Question player1(size),player2(size);
+    for(int i=0;i<size;i++){
+        cout<<"Enter question: "<<i+1;
+       // cin.ignore();
+        getline(cin,str);
+        player1.setquestion(i,str);
+        player2.setquestion(i,str);
+        cout<<"Four choices for Q#"<<i+1<<endl;
+        for(int j=0;j<4;j++){
+            count++;
+            if(count == 1){
+                cout<<"1";
+            //    cin.ignore();
+                getline(cin,ans);
+                cout<<"2";
+                player1.setans1(i,ans);
+                player2.setans1(i,ans);
+            }
+            else if(count == 2){
+            //    cin.ignore();
+                getline(cin,ans);
+                player1.setans2(i,ans);
+                player2.setans2(i,ans);
+            }
+            else if(count == 3){
+             //   cin.ignore();
+                getline(cin,ans);
+                player1.setans3(i,ans);
+                player2.setans3(i,ans);
+            }
+            else if(count == 4){
+               // cin.ignore();
+                getline(cin,ans);
+                player1.setans4(i,ans);
+                player2.setans4(i,ans);
+            }
+        }
+        cout<<"Enter correct answer: ";
+      //  cin.ignore();
+        getline(cin,correct);
+        player1.setcorrectans(i,correct);
+        player2.setcorrectans(i,correct);
+        count = 0;
+    }
+    for(int i=0;i<size;i++){
+        cout<<"Question :"<<i+1<<endl;
+        cout<<"a) "<<player1.getans1(i)<<endl;
+        cout<<"b) "<<player1.getans2(i)<<endl;
+        cout<<"c) "<<player1.getans3(i)<<endl;
+        cout<<"d) "<<player1.getans4(i)<<endl;
+        cout<<"Your answer: ";
+     //   cin.ignore();
+        getline(cin,str);
+        player1.check(i,str);
+    }
+    for(int i=0;i<size;i++){
+        cout<<"Question :"<<i+1<<endl;
+        cout<<"a) "<<player2.getans1(i)<<endl;
+        cout<<"b) "<<player2.getans2(i)<<endl;
+        cout<<"c) "<<player2.getans3(i)<<endl;
+        cout<<"d) "<<player2.getans4(i)<<endl;
+        cout<<"Your answer: ";
+       // cin.ignore();
+       cin>>ws;
+        getline(cin,str);
+        player2.check(i,str);
+    }
+    cout<<"PLayer1 : "<<player1.getcount();
+    cout<<"PLayer2 : "<<player2.getcount();
+    if(player1.getcount() < player2.getcount()){
+        cout<<"Player 1 wins";
+    }
+    else
+    cout<<"Player 2 wins";
+
+}
+
