@@ -13,3 +13,9 @@ Here I used and learn:
 10) How to perform input validation
 11) Where to use getline,why and uses
 
+# Game of 21:
+1) How to make separate files for classes, their implementations and their driver program.
+2) How to add classes to main main
+3) How to deal with classes
+4) How to deal with Accessors and mutaters
+5) How to deal with private member functions
