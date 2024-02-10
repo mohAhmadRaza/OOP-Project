@@ -19,3 +19,15 @@ Here I used and learn:
 3) How to deal with classes
 4) How to deal with Accessors and mutaters
 5) How to deal with private member functions
+
+# Cash Register Problem
+The code uses classes (InventoryItem and Cash)  having related functionality and data.
+It demonstrates the use of private and public members in a class.
+The InventoryItem class uses dynamic memory allocation (through the use of new) to create arrays for descriptions, costs, and units.
+The InventoryItem class has a constructor that initializes the dynamic arrays with default values.
+The InventoryItem class provides setter and getter methods to manipulate and retrieve the values of private members.
+The program uses loops to gather information about inventory items, such as their names, costs, and units.
+It takes user input to determine the size of the inventory and specific details for each item.
+The getCosts function in the InventoryItem class is overloaded to take either an index or a name to retrieve the cost of an item.
+The code is divided into multiple files (InventoryItem.h, InventoryItem.cpp, Cash.h, Cash.cpp) for better organization and modularity.
+The private members in the classes are encapsulated, ensuring that the internal implementation details are hidden from the outside world.
