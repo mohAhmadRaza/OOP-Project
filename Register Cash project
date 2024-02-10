@@ -1,0 +1,150 @@
+#include <string>
+using namespace std;
+
+class InventoryItem
+{
+private:
+	string *description; 
+	double *cost; 
+	int *units; 
+public:
+	// Constructor #1
+	InventoryItem(int s)
+	{
+		description = new string[s];
+		cost = new double[s];
+		units = new int[s];
+		for (int i = 0; i < s; i++) {
+			description[i] = "";
+			cost[i] = 0.0;
+			units[i] = 0;
+		}
+	}
+	
+		 void setDescription(int i,string d)
+		 { description[i] = d; }
+	
+		 void setCost(int i,double c)
+		 { cost[i] = c; }
+	
+		 void setUnits(int i,int u)
+		 { units[i] = u; }
+	
+		 // Accessor functions
+		 string getDescription(int i) const
+		 { return description[i]; }
+	
+		 double getCost(int i) const
+		 { return cost[i]; }
+	
+		 int getUnits(int i) const
+		 { return units[i]; }
+
+		 double getCosts(string name,int size) {
+			 for (int i = 0; i < size; i++) {
+				 if (description[i] == name) {
+					 return cost[i];
+					 break;
+				 }
+			 }
+		 }
+
+};
+
+#include<string>
+using namespace std;
+
+class Cash {
+private:
+	double subTotal;
+	int quantity;
+	double profit;
+	double unitPrice;
+	double total;
+	double tax;
+public:
+	Cash() {
+		subTotal = 0.0;
+		unitPrice = 0.0;
+		profit = 0.0;
+		quantity = 0;
+		total = 0.0;
+		tax = 0.0;
+	}
+	void setProfit(double cost) {
+		profit = float(cost * 30) / 100;
+	}
+	void setUnitPrice(double cost) {
+		unitPrice = cost + profit;
+	}
+	void setQuantity(int a) {
+		quantity = a;
+	}
+	void setSubTotal() {
+		subTotal = profit * quantity;
+	}
+	void setTax() {
+		tax = (subTotal * 6) / 100;
+	}
+	void setTotal() {
+		total = subTotal + tax;
+	}
+	double getTotal() {
+		return total;
+	}
+	double getsubtotal() {
+		return subTotal;
+	}
+	double gettax() {
+		return tax;
+	}
+};
+
+#include<iostream>
+#include<string>
+#include"InventoryItem.h"
+#include"CashRegister.h"
+using namespace std;
+
+int main() {
+
+	int size = 0, quantity = 0,units = 0; string item = "";
+	double cost = 0;
+	string name;
+
+	cout << "Enter how many items are: ";
+	cin >> size;
+
+	InventoryItem obj(size); Cash obj2;
+
+	for (int i = 0; i < size; i++) {
+		cout << "Enter Name of item #" << i + 1 << "  :";
+		cin >> name;
+		obj.setDescription(i, name);
+		cout << "Enter Cost of item #" << i + 1 << "  :";
+		cin >> cost;
+		obj.setCost(i, cost);
+		cout << "Enter Units of item #" << i + 1 << "  :";
+		cin >> units;
+		obj.setUnits(i, units);
+	}
+	
+	cout << "Enter item: ";
+	cin >> item;
+	cout << "Enter quantity: ";
+	cin >> quantity;
+
+	obj2.setQuantity(quantity);
+
+	cost = obj.getCosts(item,size);
+	obj2.setProfit(cost);
+	obj2.setUnitPrice(cost);
+	obj2.setSubTotal();
+	obj2.setTax();
+	obj2.setTotal();
+	cout << "Desciption: " << endl;
+	cout << "Purchase SubTotal: " << obj2.getsubtotal() << endl;
+	cout << "Tax: " << obj2.gettax() << endl;
+	cout << "Total: " << obj2.getTotal();
+	return 0;
+}
