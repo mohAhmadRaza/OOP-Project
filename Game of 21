@@ -1,0 +1,143 @@
+#include<iostream>
+#include<string>
+#include<cmath>
+#include<ctime>
+#include"GameOf21.h"
+#include<cstdlib>
+using namespace std;
+
+class Dice {
+	int userDice1Value;
+	int userDice2Value;
+	int userSum;
+	int computerDice1Value;
+	int computerDice2Value;
+	int computerSum;
+	char choice;
+	int roll(int);
+public:
+	Dice() {
+		userDice1Value = 0;
+		userDice2Value = 0;
+		userSum = 0;
+		computerDice1Value = 0;
+		computerDice2Value = 0;
+		computerSum = 0;
+		choice = 'n';
+	}
+	/*Dice(int a=0,int b=0,int c=0,int d=0,int e=0,int f=0,char g = 'n') {
+		userDice1Value = a;
+		userDice2Value = b;
+		userSum = c;
+		computerDice1Value = d;
+		computerDice2Value = e;
+		computerSum = f;
+		choice = g;
+	}*/
+	void setUserDice1(int);
+	void setUserDice2(int);
+	void setSum1(int);
+	void setComputerDice1(int);
+	void setComputerDice2(int);
+	void setSum2(int);
+	void setChoice(char);
+	int getSum1() const;
+	int getSum2() const;
+	void winner() const;
+	char getChoice() const;
+	int getUserValue1() const;
+	int getUserValue2() const;
+	int getCompValue1() const;
+	int getCompValue2() const;
+};
+
+
+int Dice::roll(int sides) {
+	int random;
+	unsigned seed = time(NULL);
+	srand(seed);
+	const int MIN_VAL = 1;
+	random = (rand() % (sides - MIN_VAL + 1) + MIN_VAL);
+	return random;
+}
+void Dice::setUserDice1(int a) {
+	userDice1Value = roll(a);
+}
+void Dice::setUserDice2(int a) {
+	userDice2Value = roll(a);
+}
+void Dice::setComputerDice1(int a) {
+	computerDice1Value = roll(a);
+}
+void Dice::setComputerDice2(int a) {
+	computerDice2Value = roll(a);
+}
+void Dice::setSum1(int a) {
+	userSum += a;
+}
+void Dice::setSum2(int a) {
+	computerSum += a;
+}
+void Dice::setChoice(char a) {
+	choice = a;
+}
+char Dice::getChoice() const {
+	return choice;
+}
+int Dice::getSum1() const {
+	return userSum;
+}
+int Dice::getSum2() const {
+	return computerSum;
+}
+void Dice::winner() const{
+	if ((userSum > computerSum) && (userSum <= 21)) {
+		cout << "User wins";
+	}
+	else
+		cout << "Computer wins";
+}
+int Dice::getUserValue1() const{
+	return userDice1Value;
+}
+int Dice::getUserValue2() const {
+	return userDice2Value;
+}
+int Dice::getCompValue1() const {
+	return computerDice1Value;
+}
+int Dice::getCompValue2() const {
+	return computerDice2Value;
+}
+
+char validation();
+
+int main() {
+
+	Dice User, Computer;
+	int sides = 6;
+	char choice = 'y';
+	while (choice == 'y') {
+		User.setUserDice1(sides);
+		User.setSum1(User.getUserValue1());
+		User.setUserDice2(sides);
+		User.setSum1(User.getUserValue2());
+		Computer.setComputerDice1(sides);
+		Computer.setSum2(Computer.getCompValue1());
+		Computer.setComputerDice2(sides);
+		Computer.setSum2(Computer.getCompValue1());
+		cout << "Your Total: " << User.getSum1() << endl;
+		choice = validation();
+	}
+	User.winner();
+	return 0;
+}
+char validation() {
+	char choice = 'n';
+	do {
+		cout<< "Enter here: ";
+		cin >> choice;
+	} while (choice != 'y' && choice != 'n');
+
+	return tolower(choice);
+}
