@@ -31,3 +31,12 @@ It takes user input to determine the size of the inventory and specific details 
 The getCosts function in the InventoryItem class is overloaded to take either an index or a name to retrieve the cost of an item.
 The code is divided into multiple files (InventoryItem.h, InventoryItem.cpp, Cash.h, Cash.cpp) for better organization and modularity.
 The private members in the classes are encapsulated, ensuring that the internal implementation details are hidden from the outside world.
+
+# Day of the year Class
+1) Used private data members so that no one can use access it without public member functions
+2) Constructor Overloading:
+Three constructors are provided, allowing the creation of objects in different ways, each has its own parameters.
+3) Private Member Function:
+Used a private function used to validate and adjust the day to a valid value.
+4) Initialization of member arrays
+5) The code includes a private function (checking()) to validate the day and adjust it if necessary.
