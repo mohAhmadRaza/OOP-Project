@@ -1,0 +1,149 @@
+#include<string>
+using namespace std;
+
+class month {
+	string monthName;
+	int monthNum;
+public:
+	month() {
+		monthName = "January";
+		monthNum = 1;
+	}
+	month(string a) {
+		monthName = a;
+		monthNum = getMonNum(a);
+	}
+	month(int a) {
+		monthNum = a;
+		monthName = getMonName(a);
+	}
+	int getMonNum(string);
+	string getMonName(int);
+	void setName(string);
+	string getname() const;
+	void setnum(int);
+	int getnum() const;
+	void display();
+
+	void operator++(int) {
+		if (monthNum == 12) {
+			monthNum = 1;
+			monthName = "January";
+		}
+		else {
+			monthNum++;
+			string months[12] = { "January","Februray","March","May","June","July","August",
+	        "September","October","November","December" };
+			
+			for (int i = 0; i < 12; i++) {
+				if (monthNum == i + 1) {
+					monthName = months[i];
+				}
+			}
+		}
+	}
+	void operator++() {
+		if (monthNum == 12) {
+			monthNum = 1;
+			monthName = "January";
+		}
+		else {
+			++monthNum;
+			string months[12] = { "January","Februray","March","May","June","July","August",
+			"September","October","November","December" };
+
+			for (int i = 0; i < 12; i++) {
+				if (monthNum == i + 1) {
+					monthName = months[i];
+				}
+			}
+		}
+	}
+	void operator--(int) {
+		if (monthNum == 1) {
+			monthNum = 12;
+			monthName = "December";
+		}
+		else {
+			monthNum--;
+			string months[12] = { "January","Februray","March","May","June","July","August",
+			"September","October","November","December" };
+
+			for (int i = 0; i < 12; i++) {
+				if (monthNum == i + 1) {
+					monthName = months[i];
+				}
+			}
+		}
+	}
+	void operator--() {
+		if (monthNum == 1) {
+			monthNum = 12;
+			monthName = "December";
+		}
+		else {
+			--monthNum;
+			monthName = getMonName(monthNum);
+		}
+	}
+};
+
+//Function Description
+#include<iostream>
+#include<iomanip>
+#include<string>
+#include"month.h"
+using namespace std;
+
+int month::getMonNum(string a) {
+	string months[12] = { "January","Februray","March","May","June","July","August",
+	"September","October","November","December" };
+	for (int i = 0; i < 12; i++) {
+		if (a == months[i]) {
+			return i + 1;
+			break;
+		}
+	}
+}
+string month::getMonName(int a) {
+	string months[12] = { "January","Februray","March","May","June","July","August",
+	"September","October","November","December" };
+	for (int i = 0; i < 12; i++) {
+		if (a == i+1) {
+			return months[i];
+			break;
+		}
+	}
+}
+void month::setName(string a) {
+	monthName = a;
+}
+string month::getname() const {
+	return monthName;
+}
+void month::setnum(int a) {
+	monthNum = a;
+}
+int month::getnum() const {
+	return monthNum;
+}
+void month::display() {
+	cout << "Month name: " << monthName << endl;
+	cout << "Month num: " << monthNum << endl;
+}
+
+int main2() {
+	month m1;
+	m1.setName("June");
+	m1.setnum(6);
+	m1.display();
+	m1++;
+	m1.display();
+	++m1;
+	m1.display();
+	m1--;
+	m1.display();
+	--m1;
+	m1.display();
+	return 0;
+}
