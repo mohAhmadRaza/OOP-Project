@@ -1,0 +1,55 @@
+#include<string>
+using namespace std;
+class Student {
+	static int roll;
+	string name;
+	double marks;
+public:
+	Student() {
+		name = "";
+		marks = 0.0;
+		roll++;
+	}
+	Student(string a,double b) {
+		name = a;
+		marks = b;
+		roll++;
+	}
+	static int getroll() {
+		return roll;
+	}
+	void setname(string a);
+	string getname() const;
+	void setmarks(double a);
+	double getmarks() const;
+};
+int Student::roll = 0;
+
+#include<iostream>
+#include<iomanip>
+#include<string>
+#include"Student.h"
+using namespace std;
+
+void Student::setmarks(double a) {
+	marks = a;
+}
+void Student::setname(string a) {
+	name = a;
+}
+string Student::getname() const {
+	return name;
+}
+double Student::getmarks() const {
+	return marks;
+}
+
+
+int main1() {
+	Student s1("Ahmad",34), s2("Raza",45), s3("Hamid",67), s4("Haider",78);
+
+	//Showing how many objects has been created
+	cout << "Number of students are: "<<Student::getroll();
+	return 0;
+}
+
