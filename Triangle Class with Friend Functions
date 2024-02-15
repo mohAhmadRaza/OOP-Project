@@ -1,0 +1,64 @@
+class Triangle {
+	double len1;
+	double len2;
+	double len3;
+public:
+	Triangle() {
+		len1 = 0;
+		len2 = 0;
+		len3 = 0;
+	}
+	Triangle(double a,double b,double c) {
+		len1 = a;
+		len2 = b;
+		len3 = c;
+	}
+	void setlen1(double);
+	void setlen2(double);
+	void setlen3(double);
+	double calcArea();
+	double calcPerimeter();
+	friend void checking(Triangle &);
+};
+
+#include<iostream>
+#include<iomanip>
+#include<string>
+#include"Triangle.h"
+using namespace std;
+
+void Triangle::setlen1(double a) {
+	len1 = a;
+}
+void Triangle::setlen2(double a) {
+	len2 = a;
+}
+void Triangle::setlen3(double a) {
+	len3 = a;
+}
+double Triangle::calcArea() {
+	return (len1 * len2 * len3)/2;
+}
+double Triangle::calcPerimeter() {
+	return len1 + len2 + len3;
+}
+
+void checking(Triangle&);
+
+int main() {
+	Triangle t1(1, 1, 1);
+	t1.setlen1(10);
+	t1.setlen2(20);
+	t1.setlen3(30);
+	checking(t1);
+	cout <<"Area: "<< t1.calcArea() << endl;
+	cout<<"Perimeter: "<<t1.calcPerimeter();
+	return 0;
+}
+void checking(Triangle &t) {
+	if ((t.len1 > 0) && (t.len2 > 0) && (t.len3 > 0)) {
+		cout << "All the inputs are correct to form a triangle";
+	}
+	else
+		cout << "Invalid Input";
+}
