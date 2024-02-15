@@ -1,0 +1,112 @@
+#include<string>
+using namespace std;
+
+class BankAccount {
+	int accountNumber;
+	double balance;
+	string accountType;
+	static int count;
+	void setAccountNum() {
+		accountNumber = count;
+	}
+public:
+	BankAccount() {
+		count++;
+		setAccountNum();
+	}
+	BankAccount(BankAccount &b) {
+		this->balance = b.balance;
+		this->accountType = b.accountType;
+		count++;
+		setAccountNum();
+	}
+	
+	friend void balanceTransfer(BankAccount&, BankAccount&);
+	void setbalance(double a) {
+		balance = a;
+	}
+	void setAccountType(string a) {
+		accountType = a;
+	}
+	double getBalance(){
+		return balance;
+	}
+	string getType(){
+		return accountType;
+	}
+};
+
+int BankAccount::count = 0;
+
+//Friend function prototype
+void balanceTransfer(BankAccount&, BankAccount&);
+
+int main() {
+	double amount = 0; string type = "";
+	BankAccount b1, b2, b3;
+
+	//For object 1
+	cout << "Enter amount";
+	cin >> amount;
+	cout << "Enter type of Account: ";
+	cin >> type;
+	b1.setbalance(amount);
+	b1.setAccountType(type);
+	cout << "Balance of b1:    " << b1.getBalance() << endl;
+	cout << "Type of b1:       " << b1.getType() << endl;
+	cout << "-------------------" << endl;
+
+
+	//For object 2
+	cout << "Enter amount";
+	cin >> amount;
+	cout << "Enter type of Account: ";
+	cin >> type;
+	b2.setbalance(amount);
+	b2.setAccountType(type);
+	cout << "Balance of b2:    " << b2.getBalance() << endl;
+	cout << "Type of b2:       " << b2.getType() << endl;
+	cout << "-------------------" << endl;
+
+
+	//For Object 3
+	cout << "Enter amount";
+	cin >> amount;
+	cout << "Enter type of Account: ";
+	cin >> type;
+	b3.setbalance(amount);
+	b3.setAccountType(type);
+	cout << "Balance of b3:    " << b3.getBalance() << endl;
+	cout << "Type of b3:       " << b3.getType() << endl;
+	cout << "-------------------" << endl;
+
+
+	//callin copy constructor to copy b2 on b4 
+	BankAccount b4(b2);
+	cout << "Balance of b2 was:  "<<b2.getBalance() << endl;
+	cout << "Type of b2 was:     " << b2.getType() << endl;
+	cout << "Copied to b4, so:   " << endl;
+	cout << "Balance of b4:      " << b4.getBalance() << endl;
+	cout << "Type of b4:         " << b4.getType() << endl;
+
+	cout << "------------------" << endl;
+	cout << "Before transfering Balance:   " << endl;
+	cout << "Balance in account b1:   " << b1.getBalance() << endl;
+	cout << "Balance in account b3:   " << b3.getBalance() << endl;
+	balanceTransfer(b1, b3);
+	cout << endl;
+	cout << "After transfering:    " << endl;
+	cout << "Balance in account b1:    " << b1.getBalance() << endl;
+	cout << "Balance in account b3:    " << b3.getBalance() << endl;
+
+	return 0;
+}
+
+void balanceTransfer(BankAccount& a, BankAccount& b) {
+	double temp = a.getBalance();
+	a.setbalance(b.getBalance());
+	b.setbalance(temp);
+}
+
+
+
