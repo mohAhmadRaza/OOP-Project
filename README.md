@@ -57,4 +57,7 @@ What can someone learn from this problem:
 3) How can we transfer data members values from one object to another object
 4) What is friend function
 5) How to define static members, their implementations, syntax, accessing etc.
-6) 
+
+# Day of the Year Class
+Here I User will enter the day of the year like 234 and I have to tell him that the entered day is like 15 september etc.Its just an example.
+And here I used classes and all the functoins of OOPs and Oerator Overloading.
