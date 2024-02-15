@@ -61,3 +61,9 @@ What can someone learn from this problem:
 # Day of the Year Class
 Here I User will enter the day of the year like 234 and I have to tell him that the entered day is like 15 september etc.Its just an example.
 And here I used classes and all the functoins of OOPs and Oerator Overloading.
+
+# Defining appropriate month and number class
+Here I Design a class where if user enters month than I have to assign a number of the month AND,
+if user enters month number than I have to assign month name and return that name.
+More ever I have overloaded the (++) operator for both post and prefixes because they are not defaultly understandable by the compiler
+Similarly Overloaded the (--) Operator to define this,if I use these operators with the classes objects in main function.
