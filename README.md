@@ -40,3 +40,21 @@ Three constructors are provided, allowing the creation of objects in different w
 Used a private function used to validate and adjust the day to a valid value.
 4) Initialization of member arrays
 5) The code includes a private function (checking()) to validate the day and adjust it if necessary.
+
+# BankAccount Problem With Classes
+Problem statemen is:
+1) Consider a simple bank account management system where each account has an account number, balance, and account type (e.g., savings, checking). You're tasked with implementing the following functionalities:
+2) Friend Function for Balance Transfer:
+3) Implement a friend function transferBalance() outside the BankAccount class to facilitate transferring funds between two bank accounts. This function should have access to the private members of BankAccount.
+4) Copy Constructor for Account Duplication:
+Define a copy constructor in the BankAccount class to duplicate an existing account when needed.
+5) Main Function to Demonstrate Operations:
+6) a main() function to create multiple bank accounts, perform balance transfers using the friend function.
+
+What can someone learn from this problem:
+1) How to define own copy constructor in user defined classes
+2) How to perform assignment in OOPs
+3) How can we transfer data members values from one object to another object
+4) What is friend function
+5) How to define static members, their implementations, syntax, accessing etc.
+6) 
