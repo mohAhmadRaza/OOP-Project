@@ -1,0 +1,134 @@
+#include<iostream>
+#include<string>
+#include"DayOfYear.h"
+#include<cmath>
+using namespace std;
+
+class DayOfYear {
+	int Day;
+	string month;
+	string months[12] = { "January","Februray","March","May","June","July","August",
+	                      "September","October","November","December" };
+	int monthsDate[13] = { 1,31,60,91,121,152,183,214,245,275,306,336,367 };
+	int checking(int);
+
+public:
+	DayOfYear(int day = 1 ) {
+		Day = checking(day);
+		month = "";
+	}
+	DayOfYear(int a, string mon) {
+		int b = checking(a), index = 0, sum = 0;
+		for (int i = 0; i < 12; i++) {
+			if (months[i] == mon) {
+				index = i + 1;
+				break;
+			}
+		}
+		for (int i = 0; i < index-1; i++) {
+			if (((i + 1) % 2 != 0 || (i + 1 == 8)) && (i+1 != 2) ) {
+				sum += 31;
+			}
+			if ((i + 1) % 2 == 0 && (i + 1 != 2) && (i + 1 != 8)) {
+				sum += 30;
+			}
+			if (i + 1 == 2) {
+				sum += 29;
+			}
+		}
+		Day = sum + b;
+	}
+
+	void display() const;
+	void setDay(int);
+	int getDay() const;
+	DayOfYear operator ++ (int) {
+		int i = 0;
+
+		DayOfYear d;
+		d.Day = Day + 1;
+		if (d.Day > monthsDate[12]) {
+			d.Day = 1;
+		}
+		for (int i = 0; i < 13; i++) {
+			int num = 0, days = 0;
+			for (int i = 0; i < 11; i++) {
+				if (Day >= monthsDate[i] && Day <= monthsDate[i + 1]) {
+					days = Day - monthsDate[i];
+					d.month = months[i];
+					break;
+				}
+			}
+		}
+		return d;
+	}
+	DayOfYear operator -- (int) {
+		int i = 0;
+
+		DayOfYear d;
+		d.Day = Day - 1;
+		if (d.Day == 0) {
+			d.Day = monthsDate[12];
+		}
+		for (int i = 0; i < 13; i++) {
+			int num = 0, days = 0;
+			for (int i = 0; i < 11; i++) {
+				if (d.Day >= monthsDate[i] && Day <= monthsDate[i + 1]) {
+					days = Day - monthsDate[i];
+					d.month = months[i];
+					break;
+				}
+			}
+		}
+		return d;
+	}
+
+};
+
+
+
+int DayOfYear::checking(int a) {
+	if (a <= 366 && a >= 1) {
+		return a;
+	}
+	else {
+		do {
+			cout << "Enter again: ";
+			cin >> a;
+		} while (a > 365 && a < 1);
+		return a;
+	}
+}
+void DayOfYear::setDay(int a) {
+	Day = checking(a);
+}
+int DayOfYear::getDay() const {
+	return Day;
+}
+
+void DayOfYear::display() const{
+	int num = 0, days = 0; string month;
+	for (int i = 0; i < 11; i++) {
+		if (Day >= monthsDate[i] && Day <= monthsDate[i + 1]) {
+			days = Day - monthsDate[i];
+			month = months[i];
+			break;
+		}
+	}
+	cout << days << " " << month;
+}
+
+int main() {
+	DayOfYear obj(1);
+	int day = 0;
+	cout << "Enter day: ";
+	cin >> day;
+	obj.setDay(day);
+	obj.display();
+	DayOfYear obj2(1);
+	obj2 = obj++;
+	obj2.display();
+	DayOfYear obj3(1);
+	obj3 = obj--;
+	return 0;
+}
