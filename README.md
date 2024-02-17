@@ -68,7 +68,7 @@ if user enters month number than I have to assign month name and return that nam
 More ever I have overloaded the (++) operator for both post and prefixes because they are not defaultly understandable by the compiler
 Similarly Overloaded the (--) Operator to define this,if I use these operators with the classes objects in main function.
 
-# 
+# Overloading Of "++(post & pre), --(post & pre), <<, >>" Operators
 1) The program defines a class named Months to represent months of the year
 2) Overloads the << (output stream) and >> (input stream) operators as friend functions for the Months class.
 3) Private member variables include monthsNum (integer) and monthsName (string).
