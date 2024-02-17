@@ -67,3 +67,26 @@ Here I Design a class where if user enters month than I have to assign a number 
 if user enters month number than I have to assign month name and return that name.
 More ever I have overloaded the (++) operator for both post and prefixes because they are not defaultly understandable by the compiler
 Similarly Overloaded the (--) Operator to define this,if I use these operators with the classes objects in main function.
+
+# 
+1) The program defines a class named Months to represent months of the year
+2) Overloads the << (output stream) and >> (input stream) operators as friend functions for the Months class.
+3) Private member variables include monthsNum (integer) and monthsName (string).
+4) Initializes a static array mon containing the names of months.
+5) The program defines a class named `Months` to represent months of the year.
+6) Overloads the `<<` (output stream) and `>>` (input stream) operators as friend functions for the `Months` class.
+7) Private member variables include `monthsNum` (integer) and `monthsName` (string).
+8) Initializes a static array `mon` containing the names of months.
+9) Includes various member functions for setting and getting month information (`setNum`, `setName`, `getNum`, `getName`, `getCheckNum`, `display`).
+10) Defines multiple constructors for the `Months` class with different parameter combinations.
+11) Implements input validation in member functions like `checking1` and `checking2` to ensure valid month names and numbers.
+12) Overloads unary operators `++` (post-increment), `++` (pre-increment), `--` (post-decrement), and `--` (pre-decrement) for the `Months` class.
+13) Uses friend functions (`operator<<` and `operator>>`) to overload stream insertion and extraction operators.
+14) Demonstrates the usage of the `Months` class by creating instances and performing operations like input/output.
+15) Creates instances of the `Months` class (`m`, `m2`, `m3`, `m4`) with different constructors and initializes them with values.
+16) Calls the `display` function to print month information for instances.
+17) Takes user input for a `Months` object using `cin >> ' which is already overloaded.
+18) Displays the output using cout.
+   
+
+
