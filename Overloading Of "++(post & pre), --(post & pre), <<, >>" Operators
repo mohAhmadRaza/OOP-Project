@@ -1,0 +1,170 @@
+#include<iostream>
+#include<string>
+#include<iomanip>
+using namespace std;
+
+//Farward Declaraion of class
+class Months;
+
+//Prototypes of traem operators overloading
+ostream& operator << (ostream&, const Months&);
+istream& operator >> (istream&, Months&);
+
+class Months {
+	int monthsNum;
+	string monthsName;
+	string mon[12] = { "January","Februray","March","May","June","July","August",
+						  "September","October","November","December" };
+	string checking1(string name) {
+		bool set1 = true, set2 = false;
+		int i = 0, count = 0;
+		string to;
+
+		do {
+			if (!isalpha(name[count])) {
+				set1 = false;
+				break;
+			}
+			count++;
+		} while (count < name.length());
+
+		if (set1) {
+			do {
+				if (mon[i] == name) {
+					set2 = true;
+					break;
+				}
+				i++;
+			} while (i < 12);
+		}
+		
+		else {
+			do {
+				cout << "Enter again: ";
+				cin >> name;
+			} while (name > mon[12] && name < mon[0]);
+		}
+		return name;
+	}
+	int checking2(int num) {
+		if (num <= 12 && num >= 1) {
+			return num;
+		}
+		else {
+			do {
+				cout << "Enter again!!";
+				cin >> num;
+			} while (num > 12 || num < 0);
+		}
+		return num;
+	}
+public:
+	Months() {
+		monthsName = "";
+		monthsNum = 0;
+	};
+	Months(int num) {
+		monthsNum = num;
+		monthsName = mon[num - 1];
+	}
+	Months(string name) {
+		monthsName = name;
+		monthsNum = getCheckNum(name);
+	}
+	Months(int num, string name) {
+		monthsName = name;
+		monthsNum = num;
+	}
+	void setNum(int num) {
+		monthsNum = num;
+	}
+	void setName(string name) {
+		monthsName = name;
+	}
+	int getNum() const {
+		return monthsNum;
+	}
+	string getName() const {
+		return monthsName;
+	}
+	int getCheckNum(string name) const {
+		bool set = false; int i = 0, index = 0;
+		while (set != true && i < 12) {
+			if (name == mon[i]) {
+				set = true;
+				index = i + 1;
+			}
+			i++;
+		}
+		return index;
+	}
+
+	void display() {
+		cout << "Current Month Number:  " << monthsNum << endl;
+		cout << "Current Month Name:  " << monthsName << endl;
+	}
+
+	//Post increment overloading
+	Months operator++(int) {
+		Months temp = *this;
+		monthsNum += 1;
+		monthsName = mon[monthsNum - 1];
+		return temp;
+	}
+
+	//pre increment operator overloading
+	Months operator++() {
+		monthsNum += 1;
+		monthsName = mon[monthsNum - 1];
+		return *this;
+	}
+
+	//Post Decrement operator
+	Months operator--(int) {
+		Months temp = *this;
+		monthsNum -= 1;
+		monthsName = mon[monthsNum - 1];
+		return temp;
+	}
+
+	//pre increment Operator
+	Months operator--() {
+		monthsNum -= 1;
+		monthsName = mon[monthsNum - 1];
+		return *this;
+	}
+
+	friend ostream& operator << (ostream&, const Months&);
+	friend istream& operator >> (istream&, Months&);
+
+};
+
+ostream& operator << (ostream &out, const Months& a) {
+	out << a.monthsNum;
+	out << " " << a.monthsName;
+	return out;
+}
+
+istream& operator >> (istream &in, Months &b) {
+	cout << "Enter the month number: ";
+	in >> b.monthsNum;
+	cout << "Enter month name: ";
+	in >> b.monthsName;
+	return in;
+}
+
+
+
+int main() {
+	Months m(5), m2("January"), m3(3, "March");
+	m.display();
+	(++m).display();
+	(m++).display();
+	m.display();
+
+	Months m4;
+	cin >> m4;
+	cout << m4;
+	return 0;
+}
+
