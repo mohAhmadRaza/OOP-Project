@@ -1,0 +1,72 @@
+#include<string>
+#include<iostream>
+using namespace std;
+
+class Person;
+ostream& operator << (ostream&, const Person&);
+
+class Person {
+	int age;
+	char* name;
+public:
+	Person() {};
+	Person(int a, const char* b) {
+		age = a;
+		name = new char[strlen(b) + 1];
+		strcpy_s(name, strlen(b)+1, b);
+	}
+	Person(int a) {
+		age = a;
+	}
+	Person(const char* b) {
+		name = new char[strlen(b) + 1];
+		strcpy_s(name, strlen(b)+1, b);
+	}
+	Person(const Person& obj) {
+		this->age = obj.age;
+		this->name = new char[strlen(obj.name) + 1];
+		strcpy_s(this->name, strlen(obj.name)+1, obj.name);
+	}
+	Person& operator = (const Person& obj) {
+		delete[] name;
+		this->age = obj.age;
+		this->name = new char[strlen(obj.name) + 1];
+		strcpy_s(this->name, strlen(obj.name)+1, obj.name);
+		return *this;
+	}
+	~Person() {
+		delete[] name;
+	}
+	friend ostream& operator << (ostream&, const Person&);
+
+	char* getName() {
+		char* n;
+		n = new char[strlen(name) + 1];
+		strcpy_s(n, strlen(name)+1, name);
+		return n;
+	}
+	void setName(const char* b) {
+		delete[] name;
+		name = new char[strlen(b) + 1];
+		strcpy_s(name, strlen(b)+1, b);
+	}
+};
+
+ostream& operator << (ostream& out, const Person& obj) {
+	out << obj.name;
+	out << " Your Age Is: " << obj.age << " Years";
+	return out;
+}
+
+int main() {
+
+	Person p1("Ahmad"), p2(23), p3(17, "Hammid");
+	Person p4(p3);
+
+	cout << p4;
+	cout << p3;
+	p3.setName("Jacklien");
+	cout << p4 << endl;
+	cout << p3;
+	return 0;
+}
