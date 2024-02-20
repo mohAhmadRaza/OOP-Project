@@ -93,3 +93,21 @@ Here I overloaded Insertion ,extension operators.
 Also I overloaded increment operators
 Here I designed copy constructor
 
+# Person Class
+Here I did:
+1) Class Declaration and Implementation:
+The code defines a class `Person` with private members `age` and `name`.
+2) Constructors, a copy constructor, a destructor, and an overloaded assignment operator are implemented.
+3) Memory Management:
+Dynamic memory allocation and deallocation are used for the `name` attribute using `new` and `delete[]`.
+4) Operator Overloading:
+Overloaded the `<<` operator for streaming to display information about a `Person` object.
+5) Friend Function:
+Utilized a friend function for overloading `<<` operator to access private members of the `Person` class.
+6) String Handling:
+Used C-style strings and functions (`strcpy_s`) for string manipulation.
+7) Object Creation and Copying:
+Created instances of the `Person` class with different constructors.
+Demonstrated object copying using both copy constructor and overloaded assignment operator.
+8) Error Handling:
+Implemented checks in the overloaded assignment operator to handle self-assignment and proper memory management.
