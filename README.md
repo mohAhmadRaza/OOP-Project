@@ -88,5 +88,8 @@ Similarly Overloaded the (--) Operator to define this,if I use these operators w
 17) Takes user input for a `Months` object using `cin >> ' which is already overloaded.
 18) Displays the output using cout.
    
-
+# ClockType Class
+Here I overloaded Insertion ,extension operators.
+Also I overloaded increment operators
+Here I designed copy constructor
 
