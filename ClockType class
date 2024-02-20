@@ -1,0 +1,121 @@
+#include<iostream>
+using namespace std;
+
+class ClockType {
+	int hours=0;
+	int minutes=0;
+	int seconds=0;
+public:
+	ClockType() {
+		hours = 0;
+		minutes = 0;
+		seconds = 0;
+	}
+	ClockType(int a, int b, int c) {
+		int pre1 = 0, pre2 = 0;
+		if (c <= 60 && c > 0) {
+			pre1 = c;
+			if (pre1 >= 60)
+				seconds = 00;
+			else
+			    seconds = c;
+		}
+		if (b <= 60 && b > 0) {
+			minutes = b;
+			if (pre1 >= 60) {
+				minutes++;
+			}
+			if (minutes >= 60) {
+				 pre2 = minutes;
+				 minutes = 0;
+			}
+			else
+				minutes = b;
+		}
+		if (a <= 24 && a > 0) {
+			if (pre2 >= 60) {
+				hours++;
+			}
+			else
+				hours = a;
+			if (hours == 23 && minutes == 60) {
+				hours = 00;
+			}
+		}
+	}
+	void setTime(int a,int b,int c) {
+		int pre1 = 0, pre2 = 0;
+		if (c <= 60 && c > 0) {
+			pre1 = c;
+			if (pre1 >= 60)
+				seconds = 00;
+			else
+				seconds = c;
+		}
+		if (b <= 60 && b > 0) {
+			minutes = b;
+			if (pre1 >= 60) {
+				minutes++;
+			}
+			if (minutes >= 60) {
+				pre2 = minutes;
+				minutes = 0;
+			}
+			else
+				minutes = b;
+		}
+		if (a <= 24 && a > 0) {
+			if (pre2 >= 60) {
+				hours++;
+			}
+			else
+				hours = a;
+			if (hours == 23 && minutes == 60) {
+				hours = 00;
+			}
+		}
+	}
+	int gethours() const{
+		return hours;
+	}
+	int getMin() const {
+		return minutes;
+	}
+	int getSec() const {
+		return seconds;
+	}
+	void operator++() {
+		this->seconds++;
+		if (seconds >= 60) {
+			seconds = 00;
+			minutes++;
+		}
+		this->minutes++;
+		if (minutes >= 60) {
+			minutes = 00;
+			hours++;
+		}
+		this->hours++;
+		if (hours >= 24) {
+			hours = 00;
+		}
+	}
+	void display() const {
+		cout << hours << ":" << minutes << ":" << seconds << endl;
+	}
+};
+
+int main() {
+	ClockType c1(22, 57, 59);
+	c1.display();
+	++c1;
+	c1.display();
+	++c1;
+	c1.display();
+	++c1;
+	c1.display();
+	++c1;
+	c1.display();
+	c1.setTime(12, 34, 45);
+	return 0;
+}
