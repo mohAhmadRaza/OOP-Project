@@ -217,3 +217,24 @@ This C++ code defines two classes: `Scores2` and `ScoresManager`, and provides a
 5. Calls the `print` method to display information for all students in the `ScoresManager`.
 
 Note: The use of `inline` functions is present for small member functions, suggesting that the compiler may try to inline these functions for potential performance improvements.
+
+##### Fraction Class
+This C++ code defines a simple Fraction class and overloads the input and output stream operators (`>>` and `<<`) to facilitate input and output operations for objects of the Fraction class.
+
+Here are the important concepts in this code:
+
+1. **Fraction Class:**
+   - The Fraction class has private data members `numerator` and `denominator`.
+   - It has two constructors, one default constructor initializing both numerator and denominator to 0, and another parameterized constructor taking two integers as arguments.
+   - The class also has friend functions to overload `<<` and `>>` operators.
+
+2. **Overloaded Stream Operators:**
+   - The `<<` operator is overloaded to display the numerator and denominator of a Fraction object.
+
+   - The `>>` operator is overloaded to take input for the numerator and denominator of a Fraction object.
+
+3. **Main Function:**
+   - In the `main` function, an object `f` of the Fraction class is created.
+   - User input is taken for the numerator and denominator using the overloaded `>>` operator.
+   - The overloaded `<<` operator is used to display the values of the numerator and denominator.
+This code demonstrates the use of operator overloading for input and output operations with a Fraction class.
