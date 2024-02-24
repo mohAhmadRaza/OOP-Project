@@ -1,0 +1,104 @@
+class Array {
+	int size;
+	float* arr;
+	bool check(int);
+public:
+	Array() {
+		size = 0;
+	}
+	Array(int s) {
+		size = s;
+		arr = new float[size];
+		for (int i = 0; i < size; i++) {
+			arr[i] = 0;
+		}
+	}
+	~Array() {
+		if (size > 0) {
+			delete[] arr;
+		}
+	}
+	void store(int, int);
+	int retrieve(int);
+	int highest();
+	int lowest();
+	double average();
+};
+
+void Array::store(int i, int element) {
+	if (check(i)) {
+		arr[i] = element;
+	}
+}
+inline int Array::retrieve(int i) {
+	if (check(i)) {
+		return arr[i];
+	}
+}
+inline bool Array::check(int i) {
+	if (i <= size && i > 0) {
+		return true;
+	}
+	else {
+		cout << "Invalid index";
+		return false;
+	}
+}
+inline int Array::highest() {
+	int highest = arr[0];
+	for (int i = 0; i < size; i++) {
+		if (arr[i] > highest) {
+			highest = arr[i];
+		}
+	}
+	return highest;
+}
+inline int Array::lowest() {
+	int lowest = arr[0];
+	for (int i = 0; i < size; i++) {
+		if (arr[i] < lowest) {
+			lowest = arr[i];
+		}
+	}
+	return lowest;
+}
+inline double Array::average() {
+	int average = 0, sum = 0;
+	for (int i = 0; i < size; i++) {
+		sum += arr[i];
+	}
+	return double(sum/size);
+}
+
+int main() {
+	int size = 0, element = 0;
+
+	cout << "Enter the size of the array: ";
+	cin >> size;
+
+	Array a(size);
+	for (int i = 0; i< size; i++) {
+		cout << "Enter the element: ";
+		cin >> element;
+		a.store(i, element);
+	}
+
+	cout << "Displaying the array: " << endl;
+	for (int i = 0; i, size; i++) {
+		cout<<a.retrieve(i);
+		cout << endl;
+	}
+
+	cout << "Highets value is: ";
+	cout << a.highest();
+
+	cout << endl;
+	cout << "lowest value is: ";
+	cout << a.lowest();
+
+	cout << endl;
+	cout << "Average is: ";
+	cout << a.average();
+
+	return 0;
+}
