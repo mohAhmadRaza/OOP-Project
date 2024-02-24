@@ -1,0 +1,103 @@
+#include<iostream>
+#include<string>
+using namespace std;
+
+class Scores2 {
+    string name;
+    int* scoresList;
+    int numScores;
+    bool check(int) const;
+public:
+    Scores2() {
+        name = "";
+        numScores = 0;
+    }
+    Scores2(string n, int num) {
+        name = n;
+        numScores = num;
+        scoresList = new int[numScores];
+
+        for (int i = 0; i < numScores; i++) {
+            scoresList[i] = 0;
+        }
+    }
+
+    void setScores();
+    void displayInfo() const;
+    ~Scores2() {
+        if (numScores > 0) {
+            delete[] scoresList;
+        }
+    }
+};
+
+inline void Scores2::setScores() {
+    int s;
+    for (int i = 0; i < numScores; i++) {
+        cout << "Enter scores for: " << i + 1 << ": ";
+        cin >> s;
+        scoresList[i] = s;
+    }
+}
+
+inline bool Scores2::check(int i) const {
+    if (i <= numScores && i > 0)
+        return true;
+    else {
+        cout << "Invalid index";
+        return false;
+    }
+}
+
+inline void Scores2::displayInfo() const {
+    cout << "Name: " << name;
+    cout << endl;
+    cout << "Your Scores Are: " << endl;
+    for (int i = 0; i < numScores; i++) {
+        cout << "Score " << i + 1 << " : " << scoresList[i] << endl;
+    }
+}
+
+class ScoresManager {
+    int size;
+    Scores2* ptr;
+public:
+    ScoresManager(int s) : size(s), ptr(new Scores2[s]) {}
+
+    
+
+    void set(int index, Scores2& obj);
+    void print();
+    ~ScoresManager() {
+        delete[] ptr;
+    }
+};
+
+inline void ScoresManager::set(int index, Scores2& obj) {
+    ptr[index] = obj;
+}
+
+inline void ScoresManager::print() {
+    for (int i = 0; i < size; i++) {
+        cout << "Student# " << i + 1 << endl;
+        ptr[i].displayInfo();
+    }
+}
+
+// Practice lab#5 task#3
+int main69() {
+    string n;
+    Scores2 s1("AhmadRaza", 3), s2("HamidRaza", 3), s3("John", 3);
+    s1.setScores();
+    s2.setScores();
+    s3.setScores();
+    ScoresManager m(3);
+
+    m.set(0, s1);
+    m.set(1, s2);
+    m.set(2, s3);
+
+    m.print();
+    return 0;
+}
+
