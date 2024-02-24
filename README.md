@@ -115,32 +115,69 @@ Implemented checks in the overloaded assignment operator to handle self-assignme
 # Pay Roll Class
 This C++ code defines a class called `PayRoll` that represents the payroll information for employees. Here are the important concepts in the code:
 
-Class Definition (`PayRoll`):
+**Class Definition (`PayRoll`)**:
    - The class has private data members `hourlyPay`, `numOfHours`, and `total`.
    - There is a private member function `check(int a) const` that checks whether the input is a valid number of hours (between 1 and 60 inclusive).
    - Two constructors are defined: a default constructor (`PayRoll()`) and a parameterized constructor (`PayRoll(int i)`).
    - Public member functions include `set(int a)`, `gethours()`, and `gettotal()`.
 
-2. Constructor Initialization:
+2. **Constructor Initialization**:
    - In the default constructor, `hourlyPay` is initialized to 4.5, `numOfHours` to 0, and `total` to 0.0.
    - In the parameterized constructor, `hourlyPay` is set to the value passed as an argument, and `numOfHours` and `total` are initialized to 0.
 
-3. Member Function `check(int a) const`:
+3. **Member Function `check(int a) const**:
    - It checks whether the input `a` is a valid number of hours.
    - Returns `true` if valid, and prints an error message and returns `false` otherwise.
 
-4. Member Function `set(int a)`:
+4. **Member Function `set(int a)**:
    - Sets the number of hours worked (`numOfHours`) using the provided value `a`.
    - Calculates the total income (`total`) based on the product of `numOfHours` and `hourlyPay`.
    - If the input is invalid (checked using the `check` function), the total income is set to 0.
 
-5. Member Functions `gethours()` and `gettotal()`:
+5. **Member Functions `gethours()` and `gettotal()**:
    - `gethours()` returns the number of hours worked.
    - `gettotal()` returns the total income.
 
-6. Main Function (`main58`):
+6. **Main Function (`main58`)**:
    - Creates an array of `PayRoll` objects dynamically using `new PayRoll[7]`.
    - Takes user input for the number of hours worked for each employee using a loop.
    - Calls the `set` function to set the hours and calculate the total income for each employee.
    - Displays the number of hours and total income for each employee in another loop.
    - Deletes the dynamically allocated array using `delete[]`.
+   - 
+
+# Array Class
+This code defines a simple C++ program that works with an array of floating-point numbers. Here are some important concepts and functionalities in the code:
+1. **Class Definition (Array)**:
+   - The `Array` class represents an array of floating-point numbers.
+   - It has private data members: `size` (to store the size of the array) and `arr` (a pointer to dynamically allocate memory for the array).
+   - Member function `check(int)` is a private utility function to check the validity of an index.
+
+2. **Constructor and Destructor:**
+   - The class has two constructors: a default constructor and a parameterized constructor that takes the size of the array and initializes it with zero values.
+   - The destructor (`~Array()`) is responsible for releasing the dynamically allocated memory when the object goes out of scope.
+
+3. **Member Functions:**
+   - `store(int, int)`: Stores an element at the specified index in the array.
+   - `retrieve(int)`: Retrieves the element at the specified index.
+   - `check(int)`: Checks if the given index is valid for the array.
+   - `highest()`: Returns the highest value in the array.
+   - `lowest()`: Returns the lowest value in the array.
+   - `average()`: Calculates and returns the average value of the array.
+
+4. **Main Function:**
+   - The `main` function gets the size of the array from the user, creates an instance of the `Array` class, and populates the array with user-input elements.
+   - It then displays the array, highest value, lowest value, and average value using the member functions of the `Array` class.
+
+5. **Input and Output:**
+   - The program prompts the user to enter the size of the array and the elements.
+   - It then displays the array and the calculated highest, lowest, and average values.
+
+6. **Issues in the Code:**
+   - There is a typo in the `for` loops inside the `main` function. The comma `,` should be replaced with a semicolon `;` in the loop conditions.
+   - In the `average()` function, the calculation of the average is incorrect. It is currently returning `double(average/sum)`, which will always be zero. It should be `double(sum/size)`.
+
+7. **Potential Improvements:**
+   - The code could benefit from additional error handling and input validation, especially when taking user input.
+   - The use of `float` for the array elements might lead to precision issues. Using `double` might be more appropriate for floating-point calculations.
+   - Consider using `std::vector` instead of manual memory management for the array. It simplifies memory management and provides dynamic sizing.
