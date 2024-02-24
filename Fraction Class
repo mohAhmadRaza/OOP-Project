@@ -1,0 +1,49 @@
+#include<iostream>
+using namespace std;
+
+class Fraction;
+ostream& operator << (ostream& cout, const Fraction& obj);
+istream& operator >> (istream& cin, Fraction& obj);
+
+
+class Fraction {
+	int numerator;
+	int denominator;
+public:
+	Fraction(){
+		numerator = 0;
+		denominator = 0;
+	}
+	Fraction(int num1, int num2) {
+		numerator = num1;
+		denominator = num2;
+	}
+	friend ostream& operator << (ostream& cout, const Fraction& obj);
+	friend istream& operator >> (istream& cin, Fraction& obj);
+};
+
+ostream& operator << (ostream& cout,const Fraction& obj) {
+
+	cout << "Numerator: " << obj.numerator << endl;
+	cout << "Denominator: " << obj.denominator << endl;
+	return cout;
+
+}
+istream& operator >> (istream& cin, Fraction& obj) {
+	cout << "Enter the numerator: ";
+	cin >> obj.numerator;
+	cout << "Enter the denominator: ";
+	cin >> obj.denominator;
+	return cin;
+}
+
+int main34() {
+	Fraction f;
+
+	//Taking input for the class members
+	cin >> f;
+
+	//Displaying the output on screen
+	cout << f;
+	return 0;
+}
