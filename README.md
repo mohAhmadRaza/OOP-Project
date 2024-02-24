@@ -111,3 +111,36 @@ Created instances of the `Person` class with different constructors.
 Demonstrated object copying using both copy constructor and overloaded assignment operator.
 8) Error Handling:
 Implemented checks in the overloaded assignment operator to handle self-assignment and proper memory management.
+
+# Pay Roll Class
+This C++ code defines a class called `PayRoll` that represents the payroll information for employees. Here are the important concepts in the code:
+
+Class Definition (`PayRoll`):
+   - The class has private data members `hourlyPay`, `numOfHours`, and `total`.
+   - There is a private member function `check(int a) const` that checks whether the input is a valid number of hours (between 1 and 60 inclusive).
+   - Two constructors are defined: a default constructor (`PayRoll()`) and a parameterized constructor (`PayRoll(int i)`).
+   - Public member functions include `set(int a)`, `gethours()`, and `gettotal()`.
+
+2. Constructor Initialization:
+   - In the default constructor, `hourlyPay` is initialized to 4.5, `numOfHours` to 0, and `total` to 0.0.
+   - In the parameterized constructor, `hourlyPay` is set to the value passed as an argument, and `numOfHours` and `total` are initialized to 0.
+
+3. Member Function `check(int a) const`:
+   - It checks whether the input `a` is a valid number of hours.
+   - Returns `true` if valid, and prints an error message and returns `false` otherwise.
+
+4. Member Function `set(int a)`:
+   - Sets the number of hours worked (`numOfHours`) using the provided value `a`.
+   - Calculates the total income (`total`) based on the product of `numOfHours` and `hourlyPay`.
+   - If the input is invalid (checked using the `check` function), the total income is set to 0.
+
+5. Member Functions `gethours()` and `gettotal()`:
+   - `gethours()` returns the number of hours worked.
+   - `gettotal()` returns the total income.
+
+6. Main Function (`main58`):
+   - Creates an array of `PayRoll` objects dynamically using `new PayRoll[7]`.
+   - Takes user input for the number of hours worked for each employee using a loop.
+   - Calls the `set` function to set the hours and calculate the total income for each employee.
+   - Displays the number of hours and total income for each employee in another loop.
+   - Deletes the dynamically allocated array using `delete[]`.
