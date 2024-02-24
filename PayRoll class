@@ -1,0 +1,60 @@
+#include<iostream>
+using namespace std;
+
+class PayRoll {
+	int hourlyPay;
+	int numOfHours;
+	double total;
+	bool check(int a) const {
+		if (a <= 60 && a > 0) {
+			return true;
+		}
+		else {
+			cout << "Invalid Input";
+			return false;
+		}
+	}
+public:
+	PayRoll() {
+		hourlyPay = 4.5;
+		numOfHours = 0;
+		total = 0.0;
+	}
+	PayRoll(int i) {
+		numOfHours = 0;
+		hourlyPay = i;
+		total = 0.0;
+	}
+	void set(int a) {
+		if (check(a) == true) {
+			numOfHours = a;
+			total = double(numOfHours * hourlyPay);
+		}
+		else
+			total = 0;
+	}
+	int gethours() const {
+		return numOfHours;
+	}
+	double gettotal() const {
+		return total;
+	}
+};
+
+int main58() {
+	int hrs;
+	PayRoll* n = new PayRoll[7];
+	for (int i = 0; i < 7; i++) {
+		cout << "Enter the hours Employee " << i + 1 << " worked: ";
+		cin >> hrs;
+		n[i].set(hrs);
+	}
+	for (int i = 0; i < 7; i++) {
+		cout << "Number of hours Employee "<< i + 1 << " worked: " << n[i].gethours() << endl;
+		cout << "His total income is: " << n[i].gettotal() << endl;
+		cout << "-----------------" << endl;
+	}
+
+	delete[] n;
+	return 0;
+}
