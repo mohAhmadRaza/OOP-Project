@@ -1,0 +1,277 @@
+#include<string>
+using namespace std;
+
+class DayFormate;
+ostream& operator << (ostream&, const DayFormate&);
+istream& operator >> (istream&, DayFormate&);
+
+class DayFormate {
+	int year;
+	int month;
+	int day;
+	string months[24] = { "31","January","28","Februray","31","March","30","April",
+						  "31","May","30","June","31","July","31","August","30","September",
+						  "31","October","30","November","31","December" };
+	int monthValidate(int);
+	int dayValidate(int);
+	bool increment();
+	bool decrement();
+public:
+	DayFormate() {
+		year = 0;
+		month = 0;
+		day = 0;
+	}
+	DayFormate(int y,int m,int d) {
+		year = y;
+		month = m;
+		day = d;
+	}
+	void setYear(int y);
+	void setMonth(int m);
+	void setDay(int d);
+	void setDate(int y, int m, int d);
+	void firstFormate() const;
+	void secondFormate() const;
+	void thirdFormate() const;
+
+	DayFormate operator ++ ();
+	DayFormate operator ++ (int);
+	DayFormate operator -- ();
+	DayFormate operator -- (int);
+	DayFormate operator - (const DayFormate&);
+
+	friend ostream& operator << (ostream&, const DayFormate&);
+	friend istream& operator >> (istream&, DayFormate&);
+};
+
+#include<iostream>
+#include<string>
+#include<cmath>
+#include"DayFormate.h"
+using namespace std;
+
+
+int DayFormate::monthValidate(int m) {
+	if (m > 12 || m < 1) {
+		do {
+			cout << "Enter the Month again: ";
+			cin >> m;
+		} while (m > 12 || m < 1);
+	}
+	return m;
+}
+
+ int DayFormate::dayValidate(int d) {
+	if (d > 31 || d < 1) {
+		do {
+			cout << "Enter the day again: ";
+			cin >> d;
+		} while (d > 31 || d < 1);
+	}
+	return d;
+}
+
+ bool DayFormate::increment() {
+	 if (this->day == 31 && this->month == 12) {
+		 this->day = 1;
+		 this->month = 1;
+		 ++this->year;
+		 return true;
+	 }
+	 else if (this->day == stoi(this->months[this->month * 2 - 2])) {
+		 this->day = 1;
+		 ++this->month;
+		 return true;
+	 }
+	 else
+		 return false;
+ }
+
+ bool DayFormate::decrement() {
+	 if (this->day == 31 && this->month == 1) {
+		 this->day = 31;
+		 this->month = 12;
+		 --this->year;
+		 return true;
+	 }
+	 else if (this->day == 1) {
+		 --this->month;
+		 this->day = stoi(this->months[(this->month * 2 - 2)]);
+		 return true;
+	 }
+	 return false;
+ }
+void DayFormate::setYear(int y) {
+	year = y;
+}
+
+void DayFormate::setMonth(int m) {
+	month = monthValidate(m);
+}
+
+void DayFormate::setDay(int d) {
+	day = dayValidate(d);
+}
+
+void DayFormate::setDate(int y, int m, int d) {
+	year = y;
+	month = monthValidate(m);
+	day = dayValidate(d);
+}
+
+void DayFormate::firstFormate() const {
+	string str = to_string(year);
+	cout << month << "/" << day <<"/"<< str.substr(2,3) << endl;
+}
+
+void DayFormate::secondFormate() const {
+	cout << months[month*2 - 1] << " " << day <<", " << year << endl;
+}
+
+void DayFormate::thirdFormate() const {
+	cout << day << " " << months[month * 2 - 1] << " " << year << endl;
+}
+
+DayFormate DayFormate::operator ++ () {
+	bool check = increment();
+	 if (!check) {
+		 ++this->day;
+		 ++this->month;
+		 ++this->year;
+	 }
+	 return *this;
+}
+
+DayFormate DayFormate::operator ++ (int Dummy) {
+	DayFormate temp = *this;
+	bool check = increment();
+	if (!check) {
+		this->day++;
+		this->month++;
+		this->year++;
+	}
+	return temp;
+}
+
+DayFormate DayFormate::operator -- () {
+	 bool check = decrement();
+	 if (!check) {
+		 --this->day;
+		 --this->month;
+		 --this->year;
+	 }
+	return *this;
+}
+
+DayFormate DayFormate::operator -- (int Dummy) {
+	DayFormate temp = *this;
+	bool check = decrement();
+	if (!check) {
+		this->day--;
+		this->month--;
+		this->year--;
+	}
+	return temp;
+}
+
+ DayFormate DayFormate::operator - (const DayFormate& obj) {
+	 DayFormate temp;
+	 temp.day = abs(day - obj.day);
+	 temp.month = month;
+	 temp.year = year;
+	 return temp;
+ }
+
+
+ostream& operator << (ostream& out, const DayFormate&obj){
+	out << obj.months[(obj.month * 2) - 1] << " " << obj.day << " ";
+	out << obj.year << endl;
+	return out;
+}
+
+istream& operator >> (istream& out, DayFormate& obj) {
+	cout << "Enter the year: ";
+	cin >> obj.year;
+	cout << "Enter the month: ";
+	cin >> obj.month;
+	obj.month = obj.monthValidate(obj.month);
+	cout << "Enter the day: ";
+	cin >> obj.day;
+	obj.day = obj.dayValidate(obj.day);
+	return out;
+}
+
+#include<iostream>
+#include<string>
+#include"DayFormate.h"
+using namespace std;
+
+
+int main() {
+    // Create instances of DayFormate
+    DayFormate day1(2024, 3, 2), day2(2024, 12, 5);
+
+    // Display the initial date formats
+    cout << "Initial date formats for day1:" << endl;
+    day1.firstFormate();
+    day1.secondFormate();
+    day1.thirdFormate();
+    cout << endl;
+
+    // Increment day1 and display the updated formats
+    cout << "After incrementing day1:" << endl;
+    day1 = ++day1;
+    day1.firstFormate();
+    day1.secondFormate();
+    day1.thirdFormate();
+    cout << endl;
+
+    cout << "----------" << endl;
+    // Increment day1 using ++ operator and display the updated formats
+    cout << "After incrementing day1 using ++ operator:" << endl;
+    (day1++).firstFormate();
+    day1.secondFormate();
+    day1.thirdFormate();
+    cout << endl;
+
+    cout << "----------" << endl;
+    // Decrement day1 and display the updated formats
+    cout << "After decrementing day1:" << endl;
+    --day1;
+    day1.firstFormate();
+    day1.secondFormate();
+    day1.thirdFormate();
+    cout << endl;
+
+    cout << "----------" << endl;
+    // Decrement day1 using -- operator and display the updated formats
+    cout << "After decrementing day1 using -- operator:" << endl;
+    day1--;
+    day1.firstFormate();
+    day1.secondFormate();
+    day1.thirdFormate();
+    cout << endl;
+
+    cout << "----------" << endl;
+    // Calculate the difference between day2 and day1 and display the result
+    cout << "Difference between day2 and day1:" << endl;
+    DayFormate day3 = day2 - day1;
+    day3.firstFormate();
+    day3.secondFormate();
+    day3.thirdFormate();
+
+    //Using the exsertion operators overloading
+    cout << "----------" << endl;
+    cout << "Displaying the month again using operator:";
+    cout << day1;
+    cout << day2;
+    cout << day3;
+
+    DayFormate day4;
+
+    //Using insertion operator overloading
+    cin >> day4;
+
+    return 0;
+}
