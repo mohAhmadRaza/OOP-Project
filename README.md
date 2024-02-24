@@ -238,3 +238,33 @@ Here are the important concepts in this code:
    - User input is taken for the numerator and denominator using the overloaded `>>` operator.
    - The overloaded `<<` operator is used to display the values of the numerator and denominator.
 This code demonstrates the use of operator overloading for input and output operations with a Fraction class.
+
+##### DayFormate Class (Assignment):
+This C++ code defines a class `DayFormate` that represents a date with various functionalities and overloads the increment, decrement, and subtraction operators. Here are some key concepts and features you can learn from this code:
+1. **Operator Overloading:**
+   - The code demonstrates overloading of prefix and postfix increment (`++`) and decrement (`--`) operators, as well as the subtraction operator (`-`).
+   - The code also overloads the insertion (`<<`) and extraction (`>>`) operators for input and output.
+2. **Class Implementation:**
+   - The `DayFormate` class is used to represent a date with year, month, and day components.
+   - It contains member functions to set individual components of the date and to set the entire date at once.
+   - The class has functions to validate the month and day to ensure they fall within valid ranges.
+3. **Date Formatting:**
+   - The class provides three different date formatting options through `firstFormate()`, `secondFormate()`, and `thirdFormate()` functions.
+4. **Array Usage:**
+   - The `months` array is used to store the number of days and corresponding month names.
+5. **Increment and Decrement Logic:**
+   - The `increment()` and `decrement()` functions are implemented to handle the logic of incrementing and decrementing the date while considering the number of days in each month.
+6. **Operator Overloading for Date Difference:**
+   - The subtraction operator is overloaded to calculate the difference between two dates and return a new `DayFormate` object representing the duration between them.
+7. **Friend Functions:**
+   - The `operator<<` and `operator>>` functions are declared as friend functions to allow access to private members of the `DayFormate` class.
+8. **Usage in Main Function:**
+   - The `main` function demonstrates the usage of the `DayFormate` class by creating instances, performing operations like incrementing and decrementing, calculating differences, and displaying date formats.
+9. **Input and Output Streams:**
+   - The code uses `iostream` and `string` headers for input and output operations.
+10. **Namespace Usage:**
+    - The code uses the `std` namespace for simplifying the usage of standard C++ library components.
+11. **Error Handling:**
+    - The code includes basic error-handling mechanisms, such as re-prompting the user for input if the entered month or day is invalid.
+12. **Understanding of Object-Oriented Concepts:**
+    - The code demonstrates the use of object-oriented concepts like encapsulation and operator overloading to create a versatile and reusable `DayFormate` class.
