@@ -68,7 +68,7 @@ if user enters month number than I have to assign month name and return that nam
 More ever I have overloaded the (++) operator for both post and prefixes because they are not defaultly understandable by the compiler
 Similarly Overloaded the (--) Operator to define this,if I use these operators with the classes objects in main function.
 
-#####  Overloading Of "++(post & pre), --(post & pre), <<, >>" Operators
+#  Overloading Of "++(post & pre), --(post & pre), <<, >>" Operators
 1) The program defines a class named Months to represent months of the year
 2) Overloads the << (output stream) and >> (input stream) operators as friend functions for the Months class.
 3) Private member variables include monthsNum (integer) and monthsName (string).
@@ -88,12 +88,12 @@ Similarly Overloaded the (--) Operator to define this,if I use these operators w
 17) Takes user input for a `Months` object using `cin >> ' which is already overloaded.
 18) Displays the output using cout.
    
-##### ClockType Class
+# ClockType Class
 Here I overloaded Insertion ,extension operators.
 Also I overloaded increment operators
 Here I designed copy constructor
 
-##### Person Class
+# Person Class
 Here I did:
 1) Class Declaration and Implementation:
 The code defines a class `Person` with private members `age` and `name`.
@@ -112,7 +112,7 @@ Demonstrated object copying using both copy constructor and overloaded assignmen
 8) Error Handling:
 Implemented checks in the overloaded assignment operator to handle self-assignment and proper memory management.
 
-##### Pay Roll Class
+# Pay Roll Class
 This C++ code defines a class called `PayRoll` that represents the payroll information for employees. Here are the important concepts in the code:
 
 **Class Definition (`PayRoll`)**:
@@ -146,7 +146,7 @@ This C++ code defines a class called `PayRoll` that represents the payroll infor
    - Deletes the dynamically allocated array using `delete[]`.
    - 
 
-###### Array Class
+# Array Class
 This code defines a simple C++ program that works with an array of floating-point numbers. Here are some important concepts and functionalities in the code:
 1. **Class Definition (Array)**:
    - The `Array` class represents an array of floating-point numbers.
@@ -182,7 +182,7 @@ This code defines a simple C++ program that works with an array of floating-poin
    - The use of `float` for the array elements might lead to precision issues. Using `double` might be more appropriate for floating-point calculations.
    - Consider using `std::vector` instead of manual memory management for the array. It simplifies memory management and provides dynamic sizing.
   
-### Scores Class with Manager Class
+# Scores Class with Manager Class
 This C++ code defines two classes: `Scores2` and `ScoresManager`, and provides a simple example in the `main69` function to demonstrate their usage.
 
 # `Scores2` Class:
@@ -209,7 +209,7 @@ This C++ code defines two classes: `Scores2` and `ScoresManager`, and provides a
    - `print()`: Prints information for all `Scores2` objects in the `ptr` array.
    - `~ScoresManager()`: Destructor to deallocate dynamic memory for the array of `Scores2` objects.
 
-# `main` Function:
+3. **`main` Function**:
 1. Creates three `Scores2` objects (`s1`, `s2`, and `s3`) with different names and a common number of scores (3).
 2. Calls the `setScores()` method on each `Scores2` object to input scores for each student.
 3. Creates a `ScoresManager` object `m` with a size of 3.
@@ -218,7 +218,7 @@ This C++ code defines two classes: `Scores2` and `ScoresManager`, and provides a
 
 Note: The use of `inline` functions is present for small member functions, suggesting that the compiler may try to inline these functions for potential performance improvements.
 
-##### Fraction Class
+# Fraction Class
 This C++ code defines a simple Fraction class and overloads the input and output stream operators (`>>` and `<<`) to facilitate input and output operations for objects of the Fraction class.
 
 Here are the important concepts in this code:
@@ -239,7 +239,7 @@ Here are the important concepts in this code:
    - The overloaded `<<` operator is used to display the values of the numerator and denominator.
 This code demonstrates the use of operator overloading for input and output operations with a Fraction class.
 
-##### DayFormate Class (Assignment):
+# DayFormate Class (Assignment):
 This C++ code defines a class `DayFormate` that represents a date with various functionalities and overloads the increment, decrement, and subtraction operators. Here are some key concepts and features you can learn from this code:
 1. **Operator Overloading:**
    - The code demonstrates overloading of prefix and postfix increment (`++`) and decrement (`--`) operators, as well as the subtraction operator (`-`).
@@ -269,7 +269,7 @@ This C++ code defines a class `DayFormate` that represents a date with various f
 12. **Understanding of Object-Oriented Concepts:**
     - The code demonstrates the use of object-oriented concepts like encapsulation and operator overloading to create a versatile and reusable `DayFormate` class.
 
-###### Rational Fraction class All problems And overloading
+# Rational Fraction class All problems And overloading
 This C++ code defines a class named `Rational` that represents rational numbers (fractions) and overloads various operators to perform arithmetic operations and comparisons on objects of this class. Here are the main concepts you can learn from this code:
 1. **Class Definition:**
    - The class `Rational` has private data members `numerator` and `denominator` to represent the rational number.
