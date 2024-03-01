@@ -1,0 +1,414 @@
+#include<string>
+#include<iostream>
+#include<cmath>
+#include<vector>
+using namespace std;
+
+class Rational;
+ostream& operator << (ostream&, const Rational&);
+istream& operator >> (istream&, Rational&);
+
+class Rational {
+	int denominator;
+	int numerator;
+	void simplify(Rational&);
+public:
+	Rational() {
+		numerator = 1;
+		denominator = 1;
+	}
+	Rational(int a, int b) {
+		numerator = a;
+		denominator = b;
+	}
+	void setDenominator(int);
+	void setNumerator(int);
+	int getDenominator() const;
+	int getNumerator() const;
+	Rational operator+(const Rational &);
+	Rational operator-(const Rational&);
+	Rational operator*(const Rational&);
+	Rational operator/(const Rational&);
+	//Rational operator%(const Rational&);
+	Rational operator+(int);
+	Rational operator-(int);
+	Rational operator*(int);
+	Rational operator/(int);
+	void operator+=(const Rational&);
+	void operator-=(const Rational&);
+	void operator*=(const Rational&);
+	void operator/=(const Rational&);
+	Rational operator++();
+	Rational operator++(int);
+	Rational operator--();
+	Rational operator--(int);
+	bool operator==(const Rational&);
+	bool operator>(const Rational&);
+	bool operator<(const Rational&);
+	bool operator<=(const Rational&); 
+	bool operator!=(const Rational&);
+	bool operator>=(const Rational&);
+	bool operator==(int);
+	bool operator>(int);
+	bool operator<(int);
+	bool operator<=(int);
+	bool operator!=(int);
+	bool operator>=(int);
+
+	friend ostream& operator << (ostream&, const Rational&);
+	friend istream& operator >> (istream&, Rational&);
+};
+
+void Rational::setDenominator(int a) {
+	if (a > 0) {
+		denominator = a;
+	}
+	else
+		denominator = 1;
+}
+
+void Rational::setNumerator(int a) {
+	numerator = a;
+}
+
+int Rational::getDenominator() const {
+	return denominator;
+}
+int Rational::getNumerator() const {
+	return numerator;
+}
+
+void Rational::simplify(Rational& obj) {
+	
+	vector<int> a; vector<int> b; vector<int> c;
+	int count = 0, divider = 2, current_value1 = abs(obj.numerator), current_value2 = abs(obj.denominator);
+
+	while (divider <= current_value1) {
+		if (current_value1 % divider == 0) {
+			a.push_back(divider);
+		}
+		divider++;
+	}
+
+	divider = 2;
+	while (divider <= current_value2) {
+		if (current_value2 % divider == 0) {
+			b.push_back(divider);
+		}
+		divider++;
+	}
+
+	bool f = false;
+	for (int i = 0; i < a.size(); i++) {
+		for (int j = 0; j < b.size(); j++) {
+			if (a[i] == b[j]) {
+				c.push_back(b[j]);
+				f = true;
+				a.erase(a.begin() + i);
+				--i;
+				b.erase(b.begin() + j);
+				--j;
+				break;
+			}
+		}
+		if (f) {
+			f = false;
+		}
+	}
+
+	int max = c[0];
+	for (int i = 0; i < c.size(); i++) {
+		if (c[i] > max) {
+			max = c[i];
+		}
+	}
+
+	obj.numerator = obj.numerator / max;
+	obj.denominator = obj.denominator / max;
+}
+
+
+Rational Rational::operator + (const Rational& obj) {
+	Rational temp; int result = 0, mod1 = 0, mod2 = 0;
+	if (denominator != obj.denominator) {
+		result = denominator * obj.denominator;
+		mod1 = (result / denominator)*numerator;
+        mod2 = (result / obj.numerator)*obj.numerator;
+		temp.numerator = mod1 + mod2;
+		temp.denominator = result;
+	}
+	else {
+		temp.numerator = numerator+obj.numerator;
+		temp.denominator = denominator;
+	}
+	simplify(temp);
+	return temp;
+}
+
+Rational Rational::operator+(int a) {
+	Rational temp;
+	temp.numerator = numerator + (denominator * a);
+	temp.denominator = denominator;
+	simplify(temp);
+	return temp;
+}
+
+Rational Rational::operator - (const Rational& obj) {
+	Rational temp; int result = 0, mod1 = 0, mod2 = 0;
+	if (denominator != obj.denominator) {
+		result = denominator * obj.denominator;
+		if (result % numerator == 0)
+			mod1 = result / numerator;
+		else
+			mod1 = result * numerator;
+
+		if (result % obj.numerator == 0)
+			mod2 = result / obj.numerator;
+		else
+			mod2 = result * obj.numerator;
+		temp.numerator = mod1 + mod2;
+		temp.denominator = result;
+	}
+	else {
+		temp.numerator = numerator - obj.numerator;
+		temp.denominator = denominator;
+	}
+	simplify(temp);
+	return temp;
+}
+
+Rational Rational::operator-(int a) {
+	Rational temp;
+	temp.numerator = numerator - (denominator * a);
+	temp.denominator = denominator;
+	simplify(temp);
+	return temp;
+}
+
+Rational Rational::operator * (const Rational& obj) {
+	Rational temp;
+	temp.numerator = numerator * obj.numerator;
+	temp.denominator = denominator* obj.denominator;
+	simplify(temp);
+	return temp;
+}
+
+Rational Rational::operator*(int a) {
+	Rational temp;
+	temp.numerator = numerator * a;
+	temp.denominator = denominator;
+	simplify(temp);
+	return temp;
+}
+
+Rational Rational::operator / (const Rational& obj) {
+	Rational temp; int result = 0, mod1 = 0, mod2 = 0;
+	if (denominator != obj.denominator) {
+		temp.numerator = numerator*obj.denominator;
+		temp.denominator = denominator*obj.numerator;
+	}
+	else {
+		temp.numerator = numerator;
+		temp.denominator = obj.numerator;
+	}
+	simplify(temp);
+	return temp;
+}
+
+void Rational::operator += (const Rational&obj) {
+	int result = 0, mod1, mod2 = 0, a1 = 0, a2 = 0;
+	if (denominator != obj.denominator) {
+		result = denominator * obj.denominator;
+		if (result % numerator == 0)
+			mod1 = result / numerator;
+		else
+			mod1 = result * numerator;
+
+		if (result % obj.numerator == 0)
+			mod2 = result / obj.numerator;
+		else
+			mod2 = result * obj.numerator;
+		numerator = mod1 + mod2;
+		denominator = result;
+	}
+	else {
+		numerator = numerator + obj.numerator;
+		denominator = denominator;
+	}
+	simplify(*this);
+}
+
+void Rational::operator -= (const Rational& obj) {
+	int result = 0, mod1, mod2 = 0, a1 = 0, a2 = 0;
+	if (denominator != obj.denominator) {
+		result = denominator * obj.denominator;
+		if (result % numerator == 0)
+			mod1 = result / numerator;
+		else
+			mod1 = result * numerator;
+
+		if (result % obj.numerator == 0)
+			mod2 = result / obj.numerator;
+		else
+			mod2 = result * obj.numerator;
+		numerator = mod1 - mod2;
+		denominator = result;
+	}
+	else {
+		numerator = numerator - obj.numerator;
+		denominator = denominator;
+	}
+	simplify(*this);
+}
+
+void Rational::operator *= (const Rational& obj) {
+	numerator = numerator * obj.numerator;
+	denominator = denominator * obj.denominator;
+	simplify(*this);
+}
+
+void Rational::operator /= (const Rational& obj) {
+	int result = 0, mod1 = 0, mod2 = 0;
+	if (denominator != obj.denominator) {
+		numerator = numerator * obj.denominator;
+		denominator = denominator * obj.numerator;
+	}
+	else {
+		numerator = numerator;
+		denominator = obj.numerator;
+	}
+	simplify(*this);
+}
+
+ostream& operator << (ostream& out, const Rational& a) {
+	out << a.numerator << "/" << a.denominator << endl;
+	return out;
+}
+
+istream& operator >> (istream& in, Rational& b) {
+	cout << "Enter the Numerator: ";
+	in >> b.numerator;
+	cout << "Enter Denominator: ";
+	in >> b.denominator;
+	return in;
+}
+
+Rational Rational::operator/(int a) {
+	Rational temp;
+	temp.numerator = numerator;
+	temp.denominator = denominator * a;
+	simplify(temp);
+	return temp;
+}
+
+//Post increment overloading
+Rational Rational::operator++(int) {
+	Rational temp = *this;
+	++numerator;
+	++denominator;
+	simplify(temp);
+	return temp;
+}
+
+//pre increment operator overloading
+Rational Rational::operator++() {
+	++numerator;
+	++denominator;
+	simplify(*this);
+	return *this;
+}
+
+//Post Decrement operator
+Rational Rational::operator--(int) {
+	Rational temp = *this;
+	--numerator;
+	--denominator;
+	simplify(temp);
+	return temp;
+}
+
+//pre increment Operator
+Rational Rational::operator--() {
+	--numerator;
+	--denominator;
+	simplify(*this);
+	return *this;
+}
+
+bool Rational::operator==(const Rational& obj) {
+	if (double(numerator / denominator) == double(obj.numerator / obj.denominator)) {
+		return true;
+	}
+	else return false;
+}
+bool Rational::operator>(const Rational&obj) {
+	if (double(numerator / denominator) > double(obj.numerator / obj.denominator)) {
+		return true;
+	}
+	else return false;
+}
+bool Rational::operator<(const Rational& obj) {
+	if (double(numerator / denominator)  < double(obj.numerator / obj.denominator)) {
+		return true;
+	}
+	else return false;
+}
+bool Rational::operator<=(const Rational& obj) {
+	if (double(numerator / denominator) <= double(obj.numerator / obj.denominator)) {
+		return true;
+	}
+	else return false;
+}
+bool Rational::operator!=(const Rational& obj) {
+	if (double(numerator / denominator) != double(obj.numerator / obj.denominator)) {
+		return true;
+	}
+	else return false;
+}
+bool Rational::operator>=(const Rational& obj) {
+	if (double(numerator / denominator) >= double(obj.numerator / obj.denominator)) {
+		return true;
+	}
+	else return false;
+}
+bool Rational::operator==(int a) {
+	if (double(numerator / denominator) == a) {
+		return true;
+	}
+	else return false;
+}
+bool Rational::operator>(int a) {
+	if (double(numerator / denominator) > a) {
+		return true;
+	}
+	else return false;
+}
+bool Rational::operator<(int a) {
+	if (double(numerator / denominator) < a) {
+		return true;
+	}
+	else return false;
+}
+bool Rational::operator<=(int a) {
+	if (double(numerator / denominator) <= a) {
+		return true;
+	}
+	else return false;
+}
+bool Rational::operator!=(int a) {
+	if (double(numerator / denominator) != a) {
+		return true;
+	}
+	else return false;
+}
+bool Rational::operator>=(int a) {
+	if (double(numerator / denominator) >= a) {
+		return true;
+	}
+	else return false;
+}
+
+
+
+
+
