@@ -293,3 +293,31 @@ This C++ code defines a class named `Rational` that represents rational numbers 
    - Input validation is not extensive, and it assumes that users will provide valid input.
 10. **Friend Functions:**
     - `friend` functions are used for the input and output operators to allow them access to private members of the `Rational` class.
+
+#### Aggregation concept with classes
+This piece of code demonstrates several object-oriented programming (OOP) concepts in C++. Here are some key concepts illustrated in the code:
+1. **Classes and Objects:**
+   - The code defines two classes: `permanentFculty` and `visitingFaculty`. Objects of these classes represent permanent and visiting faculty members.
+   - Objects like `PF` and `VF` are instances of these classes.
+2. **Constructors:**
+   - Both classes have default constructors (`permanentFculty()` and `visitingFaculty()`) and parameterized constructors (`permanentFculty(string, string, double)` and `visitingFaculty(string, string, int, double)`).
+3. **Static Member Variable:**
+   - The `facultyNumber` is a static member variable in the `permanentFculty` class, counting the number of permanent faculty members.
+4. **Friend Class:**
+   - The `visitingFaculty` class is a friend of the `permanentFculty` class, allowing it to access private members of the `permanentFculty` class.
+5. **Vector Containers:**
+   - The `University` class contains vectors (`PF` and `VF`) to store instances of permanent and visiting faculty members.
+6. **Member Functions:**
+   - Each class has member functions for setting and getting data members (`setName`, `setdesignation`, `setPay`, `setHours`, `getNumber`, etc.).
+7. **Friend Function:**
+   - The `visitingFaculty` class has a friend function (`permanentFculty::facultyNumber`) to access the static member variable of the `permanentFculty` class.
+8. **Inheritance:**
+   - There is no explicit inheritance in this code, but the relationship between permanent and visiting faculty members is managed using separate classes.
+9. **Object Interaction:**
+   - The `University` class has methods to add permanent and visiting faculty members (`addPFaculty` and `addVFaculty`) and find faculty members by name (`findFaculty`).
+10. **User Input and Control Flow:**
+    - The `main` function captures user input to create and manipulate faculty objects. It uses loops and conditional statements for user interactions.
+11. **Encapsulation:**
+    - The data members of the classes are encapsulated, and access to them is controlled through member functions.
+12. **Dynamic Memory Allocation:**
+    - There is no explicit dynamic memory allocation (e.g., with `new` or `delete`), as the code mainly uses objects and vectors.
