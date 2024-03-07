@@ -1,0 +1,289 @@
+#include<string>
+#include<vector>
+#include<iostream>
+using namespace std;
+
+class permanentFculty {
+	static int facultyNumber;
+	string name;
+	string designation;
+	double pay;
+public:
+	permanentFculty() {
+		++facultyNumber;
+		name = "";
+		designation = "";
+		pay = 0;
+	}
+	permanentFculty( string b, string c, double d) {
+		name = b;
+		designation = c;
+		pay = d;
+	}
+	void setName(string a) {
+		name = a;
+	}
+	void setdesignation(string b) {
+		designation = b;
+	}
+	void setPay(double c) {
+		pay = c;
+	}
+	string getName() const {
+		return name;
+	}
+	string getDesi() const {
+		return designation;
+	}
+	double getPay() const {
+		return pay;
+	}
+	int getNumber() const {
+		return facultyNumber;
+	}
+	friend class visitingFaculty;
+};
+int permanentFculty::facultyNumber = 0;
+
+
+class visitingFaculty {
+	string name;
+	string designation;
+	int creditHours;
+	double Hourlypay;
+	double total;
+public:
+	visitingFaculty() {
+		++permanentFculty::facultyNumber;
+		name = "";
+		designation = "";
+		creditHours = 0;
+		Hourlypay = 0;
+		total = 0;
+	}
+	visitingFaculty(string b, string c, int d,double g) {
+		name = b;
+		designation = c;
+		creditHours = d;
+		Hourlypay = g;
+	}
+	void setName(string a) {
+		name = a;
+	}
+	void setdesignation(string b) {
+		designation = b;
+	}
+	void setPay(double c) {
+		Hourlypay = c;
+	}
+	void setHours(int c) {
+		creditHours = c;
+		total = Hourlypay * creditHours;
+	}
+	string getName() const {
+		return name;
+	}
+	string getDesi() const {
+		return designation;
+	}
+	double getPay() const {
+		return Hourlypay;
+	}
+	int getNumber() const {
+		return permanentFculty::facultyNumber;
+	}
+	int getHours() const {
+		return creditHours;
+	}
+	double getTotal() const {
+		return total;
+	}
+};
+
+class University {
+	vector<permanentFculty> PF;
+	vector<visitingFaculty> VF;
+public:
+	void addPFaculty(const permanentFculty &obj) {
+			PF.push_back(obj);
+	}
+	void addVFaculty(const visitingFaculty& obj) {
+		VF.push_back(obj);
+	}
+	void findFaculty(string a) {
+		for (int i = 0; i < PF.size(); i++) {
+			if (PF[i].getName() == a) {
+				cout << "Faculty Name: " << PF[i].getName() << endl;
+				cout << "Faculty Designation: " << PF[i].getDesi() << endl;
+				cout << "Faculty Number: " << PF[i].getNumber() << endl;
+				cout << "Faculty pay: " << PF[i].getPay() << endl;
+			}
+		}
+		for (int i = 0; i < VF.size(); i++) {
+			if (VF[i].getName() == a) {
+				cout << "Faculty Name: " << VF[i].getName() << endl;
+				cout << "Faculty Designation: " << VF[i].getDesi() << endl;
+				cout << "Faculty Number: " << VF[i].getNumber() << endl;
+				cout << "Faculty TotalHours: " << VF[i].getHours() << endl;
+				cout << "Faculty HourlyPay: " << VF[i].getPay() << endl;
+				cout << "Faculty TotalPay: " << VF[i].getTotal() << endl;
+			}
+		}
+	}
+	void updateFaculty(char b) {
+		string ab; double p; int bg, a = 0;
+		if (b == 'p') {
+			cout << "1. Change name" << endl;
+			cout << "2. change designation" << endl;
+			cout << "3. change pay: ";
+			cout << "Your choice:";
+			cin >> a;
+			for (int i = 0; i < PF.size(); i++) {
+				if (a == 1) {
+					cout << "Enter Name to change: ";
+					cin >> ab;
+					PF[i].setName(ab);
+				}
+				if (a == 2) {
+					cout << "Enter designation to change: ";
+					cin >> ab;
+					PF[i].setdesignation(ab);
+				}
+				if (a == 3) {
+					cout << "Enter pay to change: ";
+					cin >> p;
+					PF[i].setPay(p);
+				}
+			}
+		}
+		else if (b == 'v') {
+			cout << "1. Change name" << endl;
+			cout << "2. change designation" << endl;
+			cout << "3. change hours: ";
+			cout << "4. change hourly pay: ";
+			cout << "Your choice:";
+			cin >> a;
+			for (int i = 0; i < VF.size(); i++) {
+				if (a == 1) {
+					cout << "Enter Name to change: ";
+					cin >> ab;
+					VF[i].setName(ab);
+				}
+				if (a == 2) {
+					cout << "Enter designation to change: ";
+					cin >> ab;
+					VF[i].setdesignation(ab);
+				}
+				if (a == 3) {
+					cout << "Enter hours to change: ";
+					cin >> bg;
+					VF[i].setHours(bg);
+				}
+				if(a==4){
+					cout << "Enter hourlypay to change: ";
+					cin >> b;
+					VF[i].setPay(b);
+				}
+			}
+		}
+	}
+};
+
+
+int main() {
+	int num = 0, choice = 0; char w; string n; double i = 0;
+
+	// Using the same objects again s the data is stored
+	permanentFculty PF;
+	visitingFaculty VF;
+
+	//Single object like single university where multiple faculties are!!
+	University UN;
+
+	cout << "Wether faculty is permanent or visiting: ";
+	cin >> w;
+	tolower(w);
+	if (w == 'p') {
+		cout << "Enter Name: ";
+		cin >> n;
+		PF.setName(n);
+		cout << "Enter designation:";
+		cin >> n;
+		PF.setdesignation(n);
+		cout << "Enter pay:";
+		cin >> i;
+		PF.setPay(i);
+		UN.addPFaculty(PF);
+	}
+	else {
+		cout << "Enter Name: ";
+		cin >> n;
+		VF.setName(n);
+		cout << "Enter designation:";
+		cin >> n;
+		VF.setdesignation(n);
+		cout << "Enter hours:";
+		cin >> num;
+		VF.setHours(num);
+		cout << "Enter Hourlypay:";
+		cin >> i;
+		VF.setPay(i);
+		UN.addVFaculty(VF);
+	}
+	string abs;
+	//Giving choices to the admin to what they want to do
+	while (choice != 4) {
+		cout << "1. Add Faculty" << endl;
+		cout << "2. Update Faculty" << endl;
+		cout << "3.Find Faculty: " << endl;
+		cout << "4. Exit" << endl;
+		cout << "Your choice:";
+		cin >> choice;
+		if (choice != 4) {
+			if (choice == 1) {
+				cout << "Wether faculty is permanent or visiting: ";
+				cin >> w;
+				tolower(w);
+				if (w == 'p') {
+					cout << "Enter Name: ";
+					cin >> n;
+					PF.setName(n);
+					cout << "Enter designation:";
+					cin >> n;
+					PF.setdesignation(n);
+					cout << "Enter pay:";
+					cin >> i;
+					PF.setPay(i);
+					UN.addPFaculty(PF);
+				}
+				else {
+					cout << "Enter Name: ";
+					cin >> n;
+					VF.setName(n);
+					cout << "Enter designation:";
+					cin >> n;
+					VF.setdesignation(n);
+					cout << "Enter hours:";
+					cin >> num;
+					VF.setHours(num);
+					cout << "Enter Hourlypay:";
+					cin >> i;
+					VF.setPay(i);
+					UN.addVFaculty(VF);
+				}
+			}
+			else if (choice == 2) {
+				cout << "Wether faculty is permanent or visiting: ";
+				cin >> w;
+				tolower(w);
+				UN.updateFaculty(w);
+			}
+			else if (choice == 3) {
+				cout << "Enter faculty name to find data: ";
+				cin >> abs;
+				UN.findFaculty(abs);
+			}
+		}
+	   
+	}
+}
