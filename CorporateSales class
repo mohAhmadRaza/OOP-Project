@@ -1,0 +1,45 @@
+#include<iostream>
+#include<string>
+using namespace std;
+
+class CorporateSales {
+	double quaters[4];
+	static double total_sales;
+public:
+	CorporateSales() {
+		for (int i = 0; i < 4; i++) {
+			quaters[i] = 0.0;
+		}
+	}
+	void setData(int i,double element) {
+		quaters[i] = element;
+		total_sales += quaters[i];
+	}
+	double display(int i) const{
+		return quaters[i];
+	}
+	static double getTotal() {
+		return total_sales;
+	}
+};
+double CorporateSales::total_sales = 0;
+
+int main() {
+	double sales = 0.0;
+	CorporateSales divisions[2];
+	for (int i = 0; i < 2; i++) {
+		for (int m = 0; m < 4; m++) {
+			cout << "Enter sales for quater#" << m + 1 << ":  ";
+			cin >> sales;
+			divisions[i].setData(m, sales);
+		}
+	}
+	for (int i = 0; i < 2; i++) {
+		for (int m = 0; m < 4; m++) {
+			cout<<divisions[i].display(m)<<"   ";
+		}
+		cout << endl;
+	}
+	cout << "Total Sales are: " << CorporateSales::getTotal();
+	return 0;
+}
