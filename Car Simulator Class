@@ -1,0 +1,129 @@
+#include<iostream>
+#include<iomanip>
+#include<string>
+#include<vector>
+using namespace std;
+
+class ParkedCar {
+	int year;
+	string model;
+	string color;
+	string licenseNumber;
+	int minutes;
+public:
+	ParkedCar() {
+		year = 0;
+		model = "";
+		color = "";
+		licenseNumber = "";
+		minutes = 0;
+	}
+	ParkedCar(int a, string b, string c, string d, int e) {
+		year = a;
+		model = b;
+		color = c;
+		licenseNumber = d;
+		minutes = e;
+	}
+	void setYear(int a) {
+		year = a;
+	}
+	void setMinutes(int a) {
+		minutes = a;
+	}
+	void setModel(string a) {
+		model = a;
+	}
+	void setColor(string a) {
+		color = a;
+	}
+	void setNumber(string a) {
+		licenseNumber = a;
+	}
+	int getYear() const {
+		return year;
+	}
+	int getMin() const {
+		return minutes;
+	}
+	string getModel() const {
+		return model;
+	}
+	string getColor() const {
+		return color;
+	}
+	string getNumber() const {
+		return licenseNumber;
+	}
+};
+
+class ParkingMeter {
+	int minutesPurchased;
+public:
+	ParkingMeter() {
+		minutesPurchased = 0;
+	}
+	ParkingMeter(int a) {
+		minutesPurchased = a;
+	}
+	void setminutes(int a) {
+		minutesPurchased = a;
+	}
+	int getMinutes() const {
+		return minutesPurchased;
+	}
+};
+
+class ParkingTicket {
+public:
+	void check(ParkedCar& m, ParkingMeter& n, string a, int b) {
+		int fine = 0, totalHours = 0;
+		cout << "Cars Year:  " << m.getYear() << endl;
+		cout << "Cars Model:  " << m.getModel() << endl;
+		cout << "Cars Licsence Number:  " << m.getNumber() << endl;
+		cout << "Cars Color:  " << m.getColor() << endl;
+		if (m.getMin() <= 60) {
+			fine = 25;
+		}
+		if (m.getMin() > 60) {
+			totalHours = ceil(m.getMin() / 60);
+			if ((m.getMin() % 60) != 0) {
+				fine = 25 + ((totalHours - 1) * 10) + 10;
+			}
+		}
+		cout << "Police's name: " << a << endl;
+		cout << "Badge Number: " << b << endl;
+		cout << "Fine Is:  " << fine;
+	}
+};
+
+
+class Police {
+	string name;
+	int badge;
+	vector<ParkedCar> cars;
+	vector<ParkingMeter> minutes;
+public:
+	Police() {
+		name = "";
+		badge = 0;
+	}
+	Police(string a, int b) {
+		name = a;
+		badge = b;
+	}
+	void add(ParkedCar& obj) {
+		cars.push_back(obj);
+	}
+	void addMin(ParkingMeter &p) {
+		minutes.push_back(p);
+	}
+	void check() {
+		for (int i = 0; i < cars.size(); i++) {
+			if (cars[i].getMin() > minutes[i].getMinutes()) {
+				ParkingTicket* ticket = new ParkingTicket;
+				ticket->check(cars[i], minutes[i], name, badge);
+			}
+		}
+	}
+};
