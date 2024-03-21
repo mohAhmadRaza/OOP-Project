@@ -1,0 +1,226 @@
+#include<iostream>
+#include<string>
+using namespace std;
+
+class String {
+
+	//Attibutes of the string class
+	char *array;
+	int size;
+	static int activeObjects;
+
+public:
+
+	//Default constructor
+	String() {
+		size = 0;
+		array = new char[size + 1];
+		array = nullptr;
+		activeObjects++;
+	}
+
+	//Parameterized construvtor
+	String(char obj[]) {
+		size = strlen(obj);
+		array = new char[size + 1];
+		for (int i = 0; i < size; i++) {
+			array[i] = obj[i];
+		}
+		activeObjects++;
+	}
+	
+	//setters
+	void setSize(int s) {
+		size = s;
+	}
+	void setcharArray(char obj[]) {
+
+		//Calculating the size
+		int s = 0;
+		while (array[s] != '\0') {
+			s++;
+		}
+		size = s;
+
+		//Reallocating the size to original array
+		array = new char[size + 1];
+		
+		//Now coping the array
+		for (int i = 0; i < size; i++) {
+			array[i] = obj[i];
+		}
+	}
+
+	//Getters
+	const char* getCharArray() const {
+		return array;
+	}
+	int getSize() const {
+		return size;
+	}
+
+	//Static members to get the total objects
+	static int getTotalObjects() {
+		return activeObjects;
+	}
+
+	//function to insert a string into another string
+	void insert(const char* str) {
+
+		//First chaecking the size
+		int s = 0;
+		while (array[s] != '\0') {
+			s++;
+		}
+
+		//Then coping the content
+		for (int i = 0; i < s; i++) {
+			array[size + i] = str[i];
+		}
+		size += s;
+	}
+
+	//Funtion to get the length
+	int getLength()const {
+		int s = 0, i = 0;
+		while (array[i] != '\0') {
+			i++;
+		}
+		return i;
+	}
+
+	//Function to reversing the string
+	void reverses() {
+
+		//First creating another string
+		char *str;
+		str = new char[strlen(array) + 1];
+		strcpy_s(str, strlen(array), array);
+		
+		//And then reversing the string
+		for (int i = 0; i < size; i++) {
+			array[size - i] = str[i];
+		}
+
+		//No deleting the string
+		delete[] str;
+	}
+
+	//Function to concatenate the string
+	void concatenate(const string& other) {
+		char* str;
+		str = new char[size + 1];
+		strcpy_s(str,size, array);
+		array = nullptr;
+		int i = 0;
+
+		//Calculating the size
+		while (other[i] != '\0') {
+			i++;
+		}
+
+		//Resetting the size of the string
+		size += i;
+
+		//Reallocating the size to the array
+		array = new char[size + 1];
+
+		//First coping the original content 
+		for (int i = 0; i < size; i++) {
+			array[i] = str[i];
+		}
+
+		//Now coping the given contnet
+		for (int i = strlen(str); i < size; i++) {
+			array[i] = other[i];
+		}
+		
+		//Deallocating the memory of the array created on heap
+		delete[] str;
+	}
+
+	//Function to copy the string to other
+	void copy() {
+		char* str;
+		str = new char[size + 1];
+		for (int i = 0; i < size; i++) {
+			str[i] = array[i];
+		}
+
+		delete[] str;
+	}
+
+	//Finding the given character
+	int Find( char substr) {
+		int i = 0;
+
+		while (array[i] != '\0') {
+			if (array[i] == substr) {
+				return i + 1;
+				break;
+			}
+		}
+	}
+
+	//Checking the character at the given index
+	char AT(int index) {
+		return array[index];
+	}
+
+	//Erasing the content of the array
+	void erase() {
+		array = nullptr;
+	}
+
+	//Displaying
+	void display() const{
+		int i = 0;
+		while (array[i] != '\0') {
+			cout << array[i];
+		}
+	}
+
+	//Deallocating the memory of the array
+	~String() {
+		delete array;
+
+		//As memory deallocated, so decrementing the number of objects
+		activeObjects--;
+	}
+};
+
+//initializing the static member variable
+int String::activeObjects = 0;
+
+int main() {
+	char obj[10];
+	cin >> obj;
+	String s(obj);
+
+	//Calling insert function
+	s.insert(obj);
+
+	//Calling reversing function
+	s.reverses();
+
+	//Calling concatinating function
+	s.concatenate(obj);
+
+	//Calling function to copy
+	s.copy();
+
+	int returned = 0;
+	returned = s.Find('a');
+	cout << returned << endl;
+
+	char character;
+	character = s.AT(2);
+	cout << character;
+
+	//Erasing the string
+	s.erase();
+
+	cout << "Total Objects are: " << s.getTotalObjects();
+
+	return 0;
+}
