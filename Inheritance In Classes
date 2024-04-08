@@ -1,0 +1,170 @@
+#include<iostream>
+#include<string>
+using namespace std;
+
+class Person {
+protected:
+	string name;
+	string CNIC;
+	string city;
+	string country;
+	string religion;
+	string address;
+	char gender;
+public:
+	Person(string a, string b, string c, string d, string e, string f, char g) :name(a), CNIC(b), city(c), country(d), religion(e), address(f), gender(g) {
+		name = a;
+		CNIC = b;
+		city = c;
+		country = d;
+		religion = e;
+		address = f;
+		gender = g;
+		cout << "Persons called" << endl;
+	}
+
+	char getgender() {
+		return gender;
+	}
+	string getCity() {
+		return city;
+	}
+	string getaddress()const {
+		return address;
+	}
+	string getCNIC()const {
+		return CNIC;
+	}
+	string getName()const {
+		return name;
+	}
+};
+
+class Students :public Person {
+protected:
+	float GPA;
+	string institutionName;
+	int TotalSubjects;
+	double fee;
+public:
+	Students(float h, string i, int j, double k, string a, string b, string c, string d, string e, string f, char g) :Person(a, b, c,d,e,f,g) {
+		GPA = h;
+		institutionName = i;
+		TotalSubjects = j;
+		fee = k;
+		cout << "Students called" << endl;
+	}
+	float getGpa()const {
+		return GPA;
+	}
+	string getInstitute()const {
+		return institutionName;
+	}
+	double getFee()const {
+		return fee;
+	}
+	int getSubjects()const {
+		return TotalSubjects;
+	}
+};
+
+
+class Employee :public Person{
+protected:
+	int EmpID;
+	string hireDate;
+public:
+	Employee(int l, string m, float h, string a, string b, string c, string d, string e, string f, char g) :Person(a, b, c, d, e, f, g) {
+		EmpID = l;
+		hireDate = m;
+		cout << "Employee cllled" << endl;
+	}
+	int getID() {
+		return EmpID;
+	}
+	string getDate()const {
+		return hireDate;
+	}
+};
+
+class productionWorker :public Employee {
+protected:
+	int shift;
+	double payRate;
+	double salary;
+public:
+	productionWorker(int n, double o, double p, int l, string m, float h, string a, string b, string c, string d, string e, string f, char g) :Employee(l, m, h, a, b, c, d, e, f, g) {
+		cout << "ProductionWorker called" << endl;
+		shift = n;
+		payRate = o;
+		salary = p;
+	}
+	void setShift(int a) {
+		shift = a;
+	}
+	void setPay(double a) {
+		payRate = a;
+	}
+	double getPay()const {
+		return payRate;
+	}
+	void setSalary(double a) {
+		salary = a;
+	}
+	double getSal()const {
+		return salary;
+	}
+};
+
+int validation(int);
+string checkName(string nam) {
+	bool check = true;
+	do {
+		check = true;
+		for (int i = 0; i < nam.length(); i++) {
+			if (!isalpha(nam[i])) {
+				check = false;
+			}
+		}
+		if (check == false) {
+			cout << "Can You Please Enter Again: ";
+			cin >> nam;
+		}
+	} while (check == false);
+	return nam;
+}
+int main() {
+	int choice = 0;
+	string nam;
+	cin >> nam;
+	nam = checkName(nam);
+	cout << "1) Are you a student" << endl;
+	cout << "2) Are you an Employee" << endl;
+	cout << "3) Are you a ProductionWorker" << endl;
+	cin >> choice;
+	choice=validation(choice);
+
+	if (choice == 1) {
+		Students *S = new Students(3.67, "UET New Campus", 10, 50000, "AhmadRaza", "34603-28373933", "Sialkot", "Pakistan", "Islam", "Muslim Town", 'M');
+		cout << "Information: " << endl;
+		cout << "Students Name: " << S->getName() << endl;
+		cout << "Students City: " << S->getCity() << endl;
+		cout << "Students CNIC: " << S->getCNIC() << endl;
+		cout << "Students Adddress: " << S->getaddress() << endl;
+		cout << "Students Institution Name: " << S->getInstitute() << endl;
+		cout << "Students Fee: " << S->getFee() << endl;
+		cout << "Students Total Subjects: " << S->getSubjects() << endl;
+		cout << "Students Gender: " << S->getgender() << endl;
+		delete S;
+	}
+
+	return 0;
+}
+
+int validation(int a) {
+	do {
+		cout << "Enter value:" << endl;
+		cin >> a;
+	} while (a<1 && a>3);
+	return a;
+}
