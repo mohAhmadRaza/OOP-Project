@@ -1,0 +1,442 @@
+#include<iostream>
+#include<string>
+#include<cmath>
+#include<vector>
+using namespace std;
+
+//class Books;
+//
+//
+//class Books {
+//	string title;
+//	string author;
+//public:
+//	Books() {
+//		title = "";
+//		author = "";
+//	}
+//	Books(string a, string b) {
+//		title = a;
+//		author = b;
+//	}
+//	string getAuthor()const {
+//		return title;
+//	}
+//	string getTitle()const {
+//		return title;
+//	}
+//	void setTitle(string a) {
+//		title = a;
+//	}
+//	void setAuthor(string a) {
+//		author = a;
+//	}
+//	~Books() {
+//		cout << "Books deleted" << endl;
+//	}
+//};
+//
+//class Liberary {
+//	vector<Books*> books;
+//public:
+//	Liberary() {
+//	}
+//
+//	void setBooks(Books& book) {
+//		books.push_back(&book);
+//	}
+//
+//	void addBooks(Books& book) {
+//		books.push_back(&book);
+//	}
+//
+//	void removeBooks(string title) {
+//		for (int i = 0; i < books.size(); i++) {
+//			if (books[i]->getTitle() == title) {
+//				books.erase(books.begin() + i);
+//			}
+//		}
+//		cout << "Now total books are: " << books.size() << endl;
+//	}
+//	void seachBooks(string title) {
+//		for (int i = 0; i < books.size(); i++) {
+//			if (books[i]->getTitle() == title) {
+//				cout << "Books title is: " << books[i]->getTitle() << endl;
+//				cout << "Books Author is: " << books[i]->getAuthor() << endl;
+//			}
+//		}
+//	}
+//
+//	~Liberary() {
+//		cout << "Liberary deleted" << endl;
+//	}
+//};
+//int main() {
+//	int num = 0, choice = 0, i = 0;
+//	string title = "", author = "";
+//	char tell = 'n';
+//
+//	cout << "Enter how many books you have:";
+//	cin >> num;
+//	Books* book = new Books[num];
+//
+//	Liberary LIB;
+//
+//	while (i < num) {
+//		cout << "Enter Title: ";
+//		cin >> title;
+//		cout << "Enter Author: ";
+//		cin >> author;
+//		book[i].setTitle(title);
+//		book[i].setAuthor(author);
+//		LIB.setBooks(book[i]);
+//		i++;
+//	}
+//
+//	cout << "Select a choice!" << endl;
+//	cout << "1. Want to add book!" << endl;
+//	cout << "2. Want to remove book!" << endl;
+//	cout << "3. Want to search book!" << endl;
+//	cin >> choice;
+//
+//	do {
+//		if (choice == 1) {
+//			Books B;
+//			cout << "Enter Title: ";
+//			cin >> title;
+//			cout << "Enter Author: ";
+//			cin >> author;
+//			B.setTitle(title);
+//			B.setAuthor(author);
+//			LIB.addBooks(B);
+//		}
+//
+//		else if (choice == 2) {
+//			cout << "Enter the name of the book you want to delete!";
+//			cin >> title;
+//			LIB.removeBooks(title);
+//		}
+//
+//		else if (choice == 3) {
+//			cout << "Enter the name of the book you ant to search!!";
+//			cin >> title;
+//			LIB.seachBooks(title);
+//		}
+//
+//		cout << "Want to do any thing more!!" << endl;
+//		cin >> tell;
+//		tolower(tell);
+//
+//	} while (tell == 'y');
+//
+//	delete[] book;
+//	return 0;
+//}
+//
+//
+//
+//
+//#include<iostream>
+//#include<string>
+//#include<cmath>
+//#include<vector>
+//using namespace std;
+//
+//class Department;
+//
+//class Faculty {
+//	string name;
+//	int number;
+//public:
+//	Faculty() {
+//		name = "";
+//		number = 0;
+//	}
+//	Faculty(string a, int b) {
+//		name = a;
+//		number = b;
+//	}
+//	string getNmae() {
+//		return name;
+//	}
+//	int  getnumber() const {
+//		return number;
+//	}
+//	void setName(string a) {
+//		name = a;
+//	}
+//	void setNum(int a) {
+//		number = a;
+//	}
+//	~Faculty() {
+//		cout << "Faculty34 deleted" << endl;
+//	}
+//};
+//
+//class Students {
+//	string name;
+//	int id;
+//public:
+//	Students() {
+//		name = "";
+//		id = 0;
+//	}
+//	Students(string a, int c) {
+//		name = a;
+//		id = c;
+//	}
+//	void setName(string a) {
+//		name = a;
+//	}
+//	void setID(int a) {
+//		id = a;
+//	}
+//	string getName() const {
+//		return name;
+//	}
+//	int getID() const {
+//		return id;
+//	}
+//	~Students() {
+//		cout << "Studnts deleted" << endl;
+//	}
+//};
+//
+//class Department {
+//	vector<Faculty*> FC;
+//	vector<Students*> ST;
+//public:
+//	Department() {
+//		cout << "Department Started" << endl;
+//	}
+//
+//	void setFaculty(Faculty &F) {
+//		FC.push_back(&F);
+//	}
+//	void setStudents(Students& S) {
+//		ST.push_back(&S);
+//	}
+//	void getFacultyData(int i) {
+//		cout << "Faculty Name: " << FC[i]->getNmae() << endl;
+//		cout << "Faculty Number: " << FC[i]->getnumber() << endl;
+//	}
+//	void getStudentData(int i) {
+//		ST[i]->getName();
+//		ST[i]->getID();
+//	}
+//	~Department() {
+//		cout << "Department Deleted" << endl;
+//	}
+//};
+//class University {
+//	Department* DP;
+//public:
+//	University(Department* D) {
+//		DP = D;
+//	}
+//	void getDeaprtmentData()const {
+//		int num = 0;
+//		cout << "Enter the number 1-3: ";
+//		cin >> num;
+//		DP->getFacultyData(num);
+//		cout << "Enter the number 1-3: ";
+//		cin >> num;
+//		DP->getStudentData(num);
+//	}
+//	~University() {
+//		cout << "University Deleted" << endl;
+//	}
+//};
+//
+//int main() {
+//	int num1 = 0, num2 = 0, i = 0, id = 0; string str1, str2;
+//	cout << "Enter number of students: ";
+//	cin >> num1;
+//
+//	Students* S = new Students[num1];
+//
+//	Department D;
+//
+//	while (i < num1) {
+//		cout << "Students name: ";
+//		cin >> str1;
+//		cout << "Student's ID: ";
+//		cin >> id;
+//		S[i].setName(str1);
+//		S[i].setID(id);
+//		D.setStudents(S[i]);
+//		i++;
+//	}
+//
+//	i = 0;
+//
+//	cout << "Enter number of Faculties: ";
+//	cin >> num2;
+//	Faculty* F = new Faculty[num2];
+//
+//	while (i < num2) {
+//		cout << "Faculty's name: ";
+//		cin >> str1;
+//		cout << "Faculty's Number: ";
+//		cin >> id;
+//		F[i].setName(str1);
+//		F[i].setNum(id);
+//		D.setFaculty(F[i]);
+//		i++;
+//	}
+//
+//	University UNI(&D);
+//	delete[] S;
+//	delete[] F;
+//	return 0;
+//}
+
+//
+//class Songs {
+//	string title;
+//	string artist;
+//	int duration;
+//public:
+//	Songs() {
+//		title = "";
+//		duration = 0;
+//		artist = "";
+//	}
+//	Songs(string a, string c, int b) {
+//		title = a;
+//		duration = b;
+//		artist = c;
+//	}
+//
+//	void setDuration(int a) {
+//		duration = a;
+//	}
+//	void setTitle(string a) {
+//		title = a;
+//	}
+//	void setArtist(string a) {
+//		artist = a;
+//	}
+//	int getDuration()const {
+//		return duration;
+//	}
+//	string getTitle()const {
+//		return title;
+//	}
+//	string getArtist() const {
+//		return artist;
+//	}
+//	~Songs() {
+//		cout << "Songs deleted" << endl;
+//	}
+//};
+//class Playlist {
+//	vector<Songs*> songs;
+//public:
+//	Playlist() {
+//		cout << "Playlist Class Started" << endl;
+//	}
+//	void setSongsData(Songs& s) {
+//		songs.push_back(&s);
+//	}
+//	void addSongs(Songs& s) {
+//		songs.push_back(&s);
+//	}
+//	
+//	void removeSongs(string title) {
+//		for (int i = 0; i < songs.size(); i++) {
+//			if (songs[i]->getTitle() == title) {
+//				songs.erase(songs.begin() + i);
+//			}
+//		}
+//	}
+//	void playSongs(int i) {
+//		cout << "Song Name: " << songs[i]->getTitle() << endl;
+//		cout << "Songs Artist: " << songs[i]->getTitle() << endl;
+//		cout << "Songs Duration: " << songs[i]->getDuration() << endl;
+//		cout << "Song Is Playing" << endl;
+//	}
+//	~Playlist() {
+//		cout << "Playlist deleted" << endl;
+//	}
+//};
+//
+//int main() {
+//	int num = 0, i = 0, id = 0; string str1, str2, dur;
+//	cout << "How many songs are there: ";
+//	cin >> num;
+//
+//	Songs ost;
+//	Playlist play;
+//
+//	{
+//		cout << "Song's name: ";
+//		cin >> str1;
+//		cout << "Song's Duration: ";
+//		cin >> id;
+//		cout << "Song's Artist: ";
+//		cin >> str2;
+//
+//		ost.setTitle(str1);
+//		ost.setDuration(id);
+//		ost.setArtist(str2);
+//		play.setSongsData(ost);
+//	}
+//	cout << "Program ended" << endl;
+//	return 0;
+//}
+
+#include<string>
+#include<cmath>
+#include<vector>
+using namespace std;
+
+class Engine {
+    string name;
+    int power;
+public:
+    Engine(string n, int p) {
+        cout << "Engine started" << endl;
+        name = n;
+        power = p;
+    }
+    void setName(string a) {
+        name = a;
+    }
+    void setPower(int a) {
+        power = a;
+    }
+    int getPower() const {
+        return power;
+    }
+    string getName()const {
+        return name;
+    }
+    ~Engine() {
+        cout << "Engine deleted!!" << endl;
+    }
+};
+
+class Car {
+    Engine eng;
+public:
+    Car(string engineName, int enginePower) : eng(engineName, enginePower) {
+        cout << "Car constructed!" << endl;
+    }
+    void engineRunning() {
+        cout << "Engine is running!!" << endl;
+    }
+    void engineStopped() {
+        cout << "Engine is stopped!!" << endl;
+    }
+    ~Car() {
+        cout << "Car deleted!!" << endl;
+    }
+};
+
+int main() {
+    Car C("Catalog", 768);
+    cout << "End" << endl;
+    return 0;
+}
+
