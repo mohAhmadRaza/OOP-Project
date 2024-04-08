@@ -1,0 +1,369 @@
+#include<iostream>
+#include<string>
+#include<vector>
+using namespace std;
+
+class Product {
+protected:
+	static int productID;
+	string name;
+	double price;
+public:
+	Product(string b, double c) :name(b), price(c) {
+		productID++;
+	}
+	static int getID() {
+		return productID;
+	}
+	string getName() const {
+		return name;
+	}
+	double getPrice() const {
+		return price;
+	}
+};
+
+class Electronics :public Product {
+protected:
+	string brand;
+	int warantyPeriods;
+public:
+	Electronics(string d, int e, string b, double c) :Product(b, c) {
+		brand = d;
+		warantyPeriods = e;
+	}
+	int getPeriod() const {
+		return warantyPeriods;
+	}
+	string getBrand() const {
+		return brand;
+	}
+};
+
+class clothing : public Product {
+protected:
+	double size;
+	string color;
+	string material;
+public:
+	clothing(double f, string g, string h, string b, double c) :Product(b, c) {
+		size = f;
+		color = g;
+		material = h;
+	}
+	double getSize() const {
+		return size;
+	}
+	string getColor() const {
+		return color;
+	}
+	string getMaterial() const {
+		return material;
+	}
+};
+
+class Book :public Product {
+	string author;
+	string genre;
+public:
+	Book(string d, string e, string b, double c) :Product(b, c) {
+		author = d;
+		genre = e;
+	}
+	string getAuthor() const {
+		return author;
+	}
+	string getGenre() const {
+		return genre;
+	}
+};
+
+
+class User {
+protected:
+	int ID;
+	string name;
+	string email;
+public:
+	User(int d, string e, string f) {
+		ID = d;
+		name = e;
+		email = f;
+	}
+	int getID() const {
+		return ID;
+	}
+	string getName() const {
+		return name;
+	}
+	string getEmial()const {
+		return email;
+	}
+};
+
+//Farward Declaration
+class ShoppingCart;
+class Orders;
+
+class Customer : public User {
+	ShoppingCart* SC;
+	Orders orders;
+public:
+	Customer(int a, string b, string c,int d) :User(a,b,c) {
+		orders.setUserID(a);
+	}
+	void add_toCart(Product &P) {
+		SC->addProducts(P);
+	}
+	void remove_cart(string a) {
+		SC->remove_Product(a);
+	}
+	void place_orders() {
+		cout << "Your order has been placed!!" << endl;
+		cout << "Total Amount Is: " << orders.getTotalPrice() << "$" << endl;
+	}
+};
+
+class Admin : public User {
+	char permissions;
+	vector<Product*> products;
+public:
+	Admin(char g, int d, string e, string f, int a, string b, double c) :User(d, e, f) {
+		permissions = g;
+	}
+	void addProduct(Product &P) {
+		products.push_back(&P);
+	}
+	void removeProducts(int a) {
+		int index = 0;
+
+		for (int i = 0; i < products.size(); i++) {
+			if (products[i]->getID() == a) {
+				index = i;
+			}
+		}
+		products.erase(products.begin() + index);
+		cout << "Now the number of products are: " << products.size() << endl;
+	}
+};
+
+class Orders {
+	static int orderID;
+	int user_id;
+	vector<Product*> PRO;
+	double totalPrice;
+public:
+	Orders() {
+		orderID++;
+	};
+	Orders(int b) {
+		user_id = b;
+		orderID++;
+	}
+	void addProducts(Product& P) {
+		PRO.push_back(&P);
+		totalPrice += P.getPrice();
+	}
+	void setUserID(int a) {
+		user_id = a;
+	}
+	int getUserID()const {
+		return user_id;
+	}
+	static int getOrderID() {
+		return orderID;
+	}
+	string getproducts(int a)const {
+		int index = 0;
+
+		for (int i = 0; i < PRO.size(); i++) {
+			if (PRO[i]->getID() == a) {
+				return PRO[i]->getName();
+			}
+		}
+	}
+	Product getproduct(int a)const {
+		int index = 0;
+
+		for (int i = 0; i < PRO.size(); i++) {
+			if (PRO[i]->getID() == a) {
+				return *PRO[i];
+			}
+		}
+	}
+	double getTotalPrice()const {
+		return totalPrice;
+	}
+};
+int Orders::orderID = 0;
+
+class ShoppingCart{
+	int totalPrice;
+public:
+	vector<Product*> PRO;
+	ShoppingCart() {};
+	void addProducts(Product& P) {
+		PRO.push_back(&P);
+		totalPrice += P.getPrice();
+	}
+	void remove_Product(string nam) {
+		int index = 0;
+
+		for (int i = 0; i < PRO.size(); i++) {
+			if (PRO[i]->getName() == nam) {
+				index = i;
+			}
+		}
+
+		PRO.erase(PRO.begin() + index);
+		cout << "Now the total items in the cart are: " << PRO.size() << endl;
+	}
+	void viewCart() {
+		for (int i = 0; i < PRO.size(); i++) {
+			cout << "product #" << i + 1 << endl;
+			cout << "--------------------" << endl;
+			cout << "Product Name: " << PRO[i]->getName() << endl;
+			cout << "Product ID: " << PRO[i]->getID() << endl;
+			cout << "Product Price: " << PRO[i]->getPrice() << endl;
+			cout << "_________________________" << endl;
+		}
+		cout << "Total price Is: " << totalPrice << "$" << endl;
+	}
+};
+
+class Payment {
+	int paymentID;
+	int order_id;
+	double amount;
+	string paymentMethod;
+public:
+	Payment(int a, int b, string c) {
+		paymentID = a;
+		order_id = b;
+		paymentMethod = c;
+	}
+	void calcAmount(int a) {
+		amount = a;
+	}
+	int getPayID()const {
+		return paymentID;
+	}
+	double getAmount()const {
+		return amount;
+	}
+	string getPayMethod()const {
+		return paymentMethod;
+	}
+};
+
+int validation(int);
+
+int main() {
+	int totalCustomers = 0, input1 = 0, input2 = 0, choice = 0, z = 0;
+	double inp1 = 0;
+	string str1, str2, str3;
+	Book* B; Electronics* E; clothing* C; Orders O;
+
+	cout << "Enter the number of customers: " << endl;
+	cin >> totalCustomers;
+	int* totalOrders = new int[totalCustomers];
+	vector<Customer> customers;
+	vector<Orders> orders;
+
+	for (int i = 0; i < totalCustomers; i++) {
+		cout << "Customer's Name: " << endl;
+		cin >> str1;
+		cout << "Customer's ID: " << endl;
+		cin >> input1;
+		cout << "Customer's Email: " << endl;
+		cin >> str2;
+		cout << "Customer's order ID: " << endl;
+		cin >> input2;
+
+		Customer CT(input1, str1, str2, input2);
+		customers.push_back(CT);
+
+		cout << "_______________________" << endl;
+		cout << "How many orders @" << str1 << " want to do!!" << endl;
+		cin >> z;
+		totalOrders[i] = z;
+
+		for (int i = 0; i < z; i++) {
+			cout << "Tell somrthing abount the product No." << i + 1 << endl;
+			cout << "1) Product is a Book" << endl;
+			cout << "2) Product is a Cloth" << endl;
+			cout << "3) Product is an Electronics" << endl;
+			cin >> choice;
+			if (choice == 1) {
+				cout << "Product name: ";
+				cin >> str1;
+				cout << "Enter price: ";
+				cin >> inp1;
+				cout << "Enter Author name: ";
+				cin >> str2;
+				cout << "Enter genre: ";
+				cin >> str3;
+				B = new Book(str2, str3, str1, inp1);
+				O.addProducts(*B);
+				customers[i].add_toCart(*B);
+			}
+			else if (choice == 2) {
+				cout << "Product name: ";
+				cin >> str1;
+				cout << "Enter price: ";
+				cin >> inp1;
+				cout << "Enter material name: ";
+				cin >> str2;
+				cout << "Enter size: ";
+				cin >> input2;
+				cout << "Enter color: ";
+				cin >> str3;
+				C = new clothing(input2, str3, str2, str1, inp1);
+				O.addProducts(*C);
+				customers[i].add_toCart(*C);
+			}
+			else if (choice == 3) {
+				cout << "Product name: ";
+				cin >> str1;
+				cout << "Enter price: ";
+				cin >> inp1;
+				cout << "Enter Brand name: ";
+				cin >> str2;
+				cout << "Enter Waranty Period: ";
+				cin >> input2;
+				E = new Electronics(str2, input2, str1, inp1);
+				O.addProducts(*E);
+				customers[i].add_toCart(*E);
+			}
+		}
+		orders.push_back(O);
+	}
+	int count = 0;
+	for (int i = 0; i < totalCustomers; i++) {
+		cout << "Customer's Name: " << customers[i].getName() << endl;
+		for (int j = 0; j < totalOrders[i]; j++) {
+			++count;
+			cout << "Product : " << j + 1 << orders[i].getproducts(count) << endl;
+			cout << "1) Want to remove from the cart" << endl;
+			cin >> choice;
+			if (choice == 1) {
+				customers[i].remove_cart(orders[i].getproducts(count));
+			}
+		}
+	}
+
+	cout << "Showing the cart of each customer: " << endl;
+	for (int i = 0; i < totalCustomers; i++) {
+	}
+
+	delete B, E, C;
+	return 0;
+}
+
+int validation(int a) {
+	do {
+		cout << "Enter value:" << endl;
+		cin >> a;
+	} while (a < 1 && a>3);
+	return a;
+}
