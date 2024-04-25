@@ -1,0 +1,185 @@
+#pragma once
+
+#include<iostream>
+#include<string>
+using namespace std;
+//
+//class Book {
+//	string title;
+//	string author;
+//	string ISBN;
+//	bool availaible;
+//public:
+//	Book() {
+//		title = "";
+//		author = "";
+//		ISBN = "";
+//		availaible = true;
+//	}
+//	Book(string a, string b, string c, bool d) :title(a), author(b), ISBN(c), availaible(d) {}
+//
+//	void dispay()const {
+//		cout << "Title : " << title << endl;
+//		cout << "Author : " << author << endl;
+//		cout << "ISBN : " << ISBN << endl;
+//		cout << "Availaibility : " << availaible << endl;
+//	}
+//
+//	Setters
+//	void setTitle(string a) {
+//		title = a;
+//	}
+//	void setAuthor(string a) {
+//		author = a;
+//	}
+//	void setISBN(string a) {
+//		ISBN = a;
+//	}
+//	void setAvail(bool a) {
+//		availaible = a;
+//	}
+//
+//	Getters
+//	string getTitle()const {
+//		return title;
+//	}
+//	string getAuthor()const {
+//		return author;
+//	}
+//	bool getAvail()const {
+//		return availaible;
+//	}
+//	string getISBN()const {
+//		return ISBN;
+//	}
+//};
+//
+//class LiberaryUser {
+//	string name;
+//	int id;
+//public:
+//	LiberaryUser() {
+//		name = "";
+//		id = 0;
+//	}
+//	LiberaryUser(string a, int b) :name(a), id(b) {};
+//
+//	void display()const {
+//		cout << "Name : " << name << endl;
+//		cout << "Id : " << id << endl;
+//	}
+//
+//	Setters
+//	void setName(string a) {
+//		name = a;
+//	}
+//	void setID(int a) {
+//		id = a;
+//	}
+//
+//	Getters
+//	string getName()const {
+//		return name;
+//	}
+//	int getID()const {
+//		return id;
+//	}
+//};
+//
+//class LiberaryItem {
+//protected:
+//	string title;
+//	bool availaibility;
+//public:
+//	LiberaryItem() {
+//		title = "";
+//		availaibility = false;
+//	}
+//	LiberaryItem(string a, bool b) :title(a), availaibility(b) {};
+//
+//	Setters
+//	void setTitle(string a) {
+//		title = a;
+//	}
+//	void setAvail(bool a) {
+//		availaibility = a;
+//	}
+//
+//	Getters
+//	string getTitle()const {
+//		return title;
+//	}
+//	bool getAvail()const {
+//		return availaibility;
+//	}
+//	virtual void display() const{
+//		cout << "Title : " << title << endl;
+//		cout << "Availaibility : " << availaibility << endl;
+//	}
+//};
+//
+//class BookItem:public LiberaryItem {
+//	string ISBN;
+//public:
+//
+//	BookItem() :LiberaryItem("", false) {
+//		ISBN = "";
+//	}
+//
+//	BookItem(string a, string b, bool c) :LiberaryItem(b, c) {
+//		ISBN = a;
+//	}
+//
+//	void display()const {
+//		cout << "Title : " << title << endl;
+//		cout << "ISBN : " << ISBN << endl;
+//		cout << "Availaibility : " << availaibility << endl;
+//	}
+//
+//	void setISBN(string a) {
+//		ISBN = a;
+//	}
+//	string getISBN()const {
+//		return ISBN;
+//	}
+//};
+//
+//class DVD :public LiberaryItem {
+//	string director;
+//public:
+//	DVD() :LiberaryItem("", false) {
+//		director = "";
+//	}
+//	DVD(string a, string b, bool c) :LiberaryItem(b, c) {
+//		director = a;
+//	}
+//
+//	void display()const {
+//			cout << "Title : " << title << endl;
+//			cout << "ISBN : " << director << endl;
+//			cout << "Availaibility : " << availaibility << endl;
+//	}
+//
+//	void setDirector(string a) {
+//		director = a;
+//	}
+//	string getDirector()const {
+//		return director;
+//	}
+//};
+//
+//int main() {
+//	Book book("Jawab-e-Shikwa","Iqbal","234-QAW",true);
+//	LiberaryUser user("Ahmad Raza",12);
+//	LiberaryItem* dvd = new DVD("Nadeem Baig", "Jawab-e-Shikwa", true);
+//
+//	book.dispay();
+//	cout << "--------------------" << endl;
+//	user.display();
+//	cout << "--------------------" << endl;
+//	dvd->display();
+//	cout << "--------------------" << endl;
+//
+//	return 0;
+//}
+
