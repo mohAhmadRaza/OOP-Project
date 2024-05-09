@@ -1,0 +1,115 @@
+#include <stdio.h>
+#include <stdbool.h>
+
+void printBoard(char array[3][3]) {
+    for (int i = 0; i < 3; i++) {
+        printf("|");
+        for (int j = 0; j < 3; j++) {
+            printf("%c|", array[i][j]);
+        }
+        printf("\n");
+    }
+}
+
+bool checkWin(char array[3][3], char mark) {
+    for (int i = 0; i < 3; i++) {
+        if ((array[i][0] == mark && array[i][1] == mark && array[i][2] == mark) || // Rows
+            (array[0][i] == mark && array[1][i] == mark && array[2][i] == mark)) { // Columns
+            return true;
+        }
+    }
+    // Diagonals
+    if ((array[0][0] == mark && array[1][1] == mark && array[2][2] == mark) ||
+        (array[0][2] == mark && array[1][1] == mark && array[2][0] == mark)) {
+        return true;
+    }
+    return false;
+}
+
+void playTurn(char array[3][3], char mark1, char mark2, char name1[50], char name2[50]) {
+    int a, b, c, d;
+    int turn = 0;
+    bool win = false;
+    while (!win && turn < 9) {
+        printf("\n");
+        printf("----------------\n");
+        printf("For Player : 1\n");
+        printf("Enter Position For Your Mark To Put(Row, Column) : ");
+        scanf("%d %d", &a, &b);
+        if (array[a][b] == ' ') {
+            array[a][b] = mark1;
+            printBoard(array);
+            printf("\n");
+            if (checkWin(array, mark1)) {
+                printf("%s Wins\n", name1);
+                win = true;
+            }
+            printf("----------------\n");
+            printf("For Player : 2\n");
+            printf("Enter Position For Your Mark To Put(Row, Column) : ");
+            scanf("%d %d", &c, &d);
+
+            if (array[c][d] == ' ') {
+                array[c][d] = mark2;
+                turn++;
+                printBoard(array);
+   
+                if (checkWin(array, mark2) && !win) {
+                    printf("%s Wins\n", name2);
+                    win = true;
+                }
+            }
+            else {
+                printf("You Can't rewrite the Value\n");
+                turn--;
+            }
+        }
+        else {
+            printf("You Can't rewrite the Value\n");
+            turn--;
+        }
+    }
+    if (!win) {
+        printf("Tied!!\n");
+    }
+}
+
+char chooseMark() {
+    char mark;
+    printf("Choose Your Mark (0/1) : ");
+    scanf(" %c", &mark);
+    return mark;
+}
+
+void chooseName(char name[50]) {
+    printf("Enter Name : ");
+    scanf("%49s", name); // prevent buffer overflow
+}
+
+int main() {
+    printf(" ************ \n");
+    printf(" * Tic Tac Toe Game * \n");
+    printf(" * Presentor : Arbaz Ali * \n");
+    printf(" ************ \n");
+    char name1[50], name2[50];
+    char mark1, mark2;
+    chooseName(name1);
+    mark1 = chooseMark();
+    chooseName(name2);
+    mark2 = chooseMark();
+    while (mark1 == mark2) {
+        printf("Already Chosen!!\n");
+        printf("Enter Your Mark Again!!: ");
+        mark2 = chooseMark();
+    }
+    char array[3][3] = { {' ', ' ', ' '}, {' ', ' ', ' '}, {' ', ' ', ' '} };
+    char again = 'y';
+    while (again == 'y') {
+        playTurn(array, mark1, mark2, name1, name2);
+        printf("\n------------------\n");
+        printf("Want To Play Again!! (y/n)\n");
+        scanf(" %c", &again);
+    }
+    printf("Thanks For Playing!!\n");
+    return 0;
+}
