@@ -1,0 +1,40 @@
+#include<iostream>
+using namespace std;
+
+class A {
+	int a;
+public:
+	A(int x = 1) {
+		a = x;
+	}
+	void twist() {
+		cout << "Base class Twist Function Called" << endl;
+		a *= 2;
+	}
+	int getVal() {
+		twist();
+		return a;
+	}
+};
+
+class B:public A {
+	int b;
+public:
+	B(int x = 1, int y=5):A(x) {
+		b = y;
+	}
+	void twist() {
+		cout << "Derived class Twist Function Called" << endl;
+		b *= 5;
+	}
+};
+
+
+int main() {
+	A a; B b;
+
+	cout << a.getVal() << endl;
+	cout << b.getVal() << endl;
+
+	return 0;
+}
